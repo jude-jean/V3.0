@@ -1,0 +1,267 @@
+/********** ets_cal.css ************************************************************/
+#ecran {
+/*  border : 1px solid black;*/
+/*  display : block;  */
+  width : 740px;
+}
+body > #ecran {
+  width : 735px;
+}
+
+#barre_outils, #info_impression {
+  display : none;
+}
+
+#rdv_msg {
+  white-space: pre;
+  width : 662px;
+  line-height : 1.2em;
+  height : auto;
+/*  overflow : auto;*/
+}
+/*
+form input, form select {
+  border : none;
+}
+*/
+.label1_print {
+  width : 100px;
+  display : block;
+  float : left;
+  clear : left;
+}
+
+#rdv_objet_print, #rdv_emplt_print, #rdv_debut_print, #rdv_fin_print, #rappel_print, #categorie_print, #disponibilite_print {
+  height : 1.2em;
+  width : 100%;
+}
+
+#rdv_emplt_print #emplt {
+  white-space : pre;
+  width : 86%;
+  height : 100%;
+}
+#rdv_heure_print {
+  clear : left;
+}
+
+#rdv_heure_print span {
+  padding-right : 5px;
+}
+#ligne_options span {
+  padding-right : 30px;
+}
+#date_heure_fin {
+  padding-left : 25px;
+}
+
+#rdv_msg_text {
+  width : 662px;
+  white-space: pre;
+
+}
+#entete_impression {
+  display: block;
+  font-weight : bold;
+}
+
+#rdv_objet {
+  margin-top : 3px;
+}
+#rdv_objet, #rdv_debut, #rdv_fin {
+  width : 100%;
+  height : 2em;
+}
+
+#rdv_emplt {
+  width : 100%;
+  height : 3em;
+}
+
+.label1 {
+  width : 13%;
+  float : left;
+  display : block;
+}
+
+#rdv_objet input{
+  float : left;
+  display : block;
+  width : 515px;
+}
+#emplt {
+  float : left;
+}
+#emplt input{
+  display : block;
+}
+#emplt select {
+  display : none;
+}
+
+#emplt select {
+  width : 264px;
+}
+#rdv_debut, #rdv_fin {
+  clear : left;
+  position : relative;
+}
+#rdv_debut .label_date, #rdv_fin .label_date {
+  width : 50px;
+  display : block;
+  float : left;
+}
+#rdv_debut input, #rdv_debut select, #rdv_fin .heure, #rdv_fin input, #rdv_fin select, #rdv_fin .heure {
+  display : block;
+  float : left;
+}
+#rdv_debut a, #rdv_fin a {
+  display : none;
+}
+
+#rdv_fin .heure, #rdv_debut .heure {
+  width : 97px;
+}
+
+#rdv_debut .label_heure, #rdv_fin .label_heure {
+  width : 50px;
+  display : block;
+  float : left;
+  margin-left : 10px;
+}
+#rdv_debut select, #rdv_fin select {
+  margin-left : 3px;
+}
+#rdv_debut input, #rdv_fin input {
+  width : 35px
+}
+#rappel, #disponibilite, #categorie {
+  float : left;
+  height : 2em;
+}
+#disponibilite, #categorie {
+  margin-left : 10px;
+}
+
+#rdv_info {
+  display : block;
+  clear : left;
+  width : 61%;
+  height : 200px;
+}
+#rdv_rappel, #rdv_dispo, #rdv_categorie {
+  margin-left : 5px;
+}
+#rappel {
+  clear : left;
+}
+
+/******** css pour mini_cal *************************************************/
+
+#img_mini_cal_hdebut, #mini_cal_hdebut {
+  margin-left : 5px;
+}
+#img_mini_cal_hfin, #mini_cal_hfin {
+  margin-left : 5px;
+}
+#mini_cal_hdebut, #mini_cal_hfin {
+  display : none;
+  float : left;
+  border : 1px solid blue;
+  width : 132px;
+  height : 167px;
+  position : absolute;
+  top : 23px;
+  left : 145px;
+  z-index : 100;
+  background-color : #FFFFB3;
+  white-space : pre;
+/*  visibility : hidden; */
+}
+
+#titre_lig_semaine {
+  clear : left;
+/*  margin-left : 2px;*/
+  height : 1.1em;
+  width : 100%;
+  border-bottom : 1px solid black;
+}
+.lig_semaine {
+  clear : left;
+/*  float : left; */
+  height : 1.1em;
+  width : 100%;
+/*  margin-left : 2px; */
+}
+/*
+.lig_semaine a {
+  display : block;
+  width : 100%;
+}
+*/
+.cel_jour, .cel_jour_inactif, #cel_jour_actif, #cel_aujourdhui {
+  float : left;
+  width : 18px;
+  height : 100%;
+  text-align : right;
+}
+#cel_aujourdhui {
+  font-weight : bold;
+  color : #FF5B24;
+}
+/*
+#cel_aujourdhui a:link, #cel_aujourdhui a:visited  {
+  color : #FF5B24;
+  text-decoration: none;
+}
+.cel_jour a:link, .cel_jour a:visited {
+  color : black;
+  text-decoration: none;
+}
+.cel_jour_inactif a:link, .cel_jour_inactif a:visited {
+  color: #FCFCFC;
+  text-decoration: none;
+}
+*/
+.cel_jour_inactif {
+  background-color: #BDBDBD;
+}
+.rdv {
+  font-weight : bold;
+}
+#cel_jour_actif {
+  font-weight : bold;
+  color : blue;
+}
+/*
+#cel_jour_actif a:link, #cel_jour_actif a:visited {
+  color : blue;
+  text-decoration: none;
+}
+*/
+#titre_mini_annee {
+  color : #FF5B24;
+  font-weight : bold;
+  text-align : center;
+}
+#titre_mini_mois {
+  width : 100%;
+  height : 1.2em;
+}
+#t11_mini_mois, #t13_mini_mois {
+  float : left;
+  width : 16px;
+  height : 16px;
+  text-align : center;
+}
+#t12_mini_mois {
+  float : left;
+  width : 97px;
+  text-align : center;
+  color : blue;
+}
+#t11_mini_mois a img, #t13_mini_mois a img, #t11_rdv_jour a img, #t13_rdv_jour a img {
+  border-style : none;
+/*  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='chemin/image.png', sizingMethod='scale');
+*/
+}

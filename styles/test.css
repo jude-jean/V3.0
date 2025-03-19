@@ -1,0 +1,308 @@
+/* Fichier css externe valable pour le fichier etechnoserv.pl */
+html {
+   background-color:aqua;
+ }
+ 
+#ecran {
+  border : 1px solid white;
+/*  display : block;  */
+  width : 750px;
+}
+#tableau > .ouvre, #tableau > .samedi, #tableau > .dimanche, #tableau > .Lig11_debut {
+  height : 1.35em;
+}
+
+#menu_actions {
+  clear : left;
+  margin-left : 45px;
+  border : 1px solid red;
+  margin-top : 5px;
+}
+#barre_outils {
+  clear : left;
+  margin-left : 40px;
+  margin-top : 20px;
+  font-size : 0.8em;
+  height : 40px;
+  border : 1px solid yellow;
+}
+#ecran > #barre_outils {
+  height : 50px;
+  border : 1px solid white;
+}
+
+#barre_outils select, #barre_outils input  {
+  font-size : 0.8em;
+}
+#barre_outils #remplir {
+  width : 180px;
+  margin-right : 0px;
+  float : left;
+}
+#barre_outils #selectionner{
+  width : 230px;
+  margin-right : 0;
+  margin-left : 7px;
+  float : left;
+}
+#barre_outils #appliquer_selection {
+  width : 50px;
+  margin-left : 7px;
+/*  float :left;*/
+}
+
+
+#tableau {
+/*  display : block;    */
+  width : 729px;
+  height : 100%;
+  font-size : 0.8em;
+  background-color : white;
+  background-image :url(../images/ellipse_h.gif);
+  background-repeat : no-repeat;
+/*  border : 3px solid blue; */
+}
+
+
+#tableau select {
+  font-size : 0.8em;
+}
+#tableau input {
+  font-size : 0.8em;
+  margin-left : 3px;
+}
+
+.Lig11_debut {
+  font-weight : bold;
+  width : 100%;
+  height : 2.8em;
+  display : in-line;
+/*  border : 1px solid orange;  */
+}
+.Lig11_debut_hs {
+  border-left : 1px solid maroon;
+  border-top : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+  width : 180px;
+  height : 100%;
+  float : left;
+  display : block;
+  text-align : center;
+}
+.Lig11_debut_col2 {
+  width : 65px;
+  height : 100%;
+  border-left : 1px solid maroon;
+  border-top : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+  float : left;
+
+}
+
+.Lig11_debut_hs_t1, .Lig11_debut_ast_t1 {
+  width : 100%;
+  border-bottom : 1px solid maroon;
+}
+.Lig11_debut_hs_t2, .Lig11_debut_ast_t2 {
+  width : 100%;
+/*  height : 100%; */
+  display : in-line;
+}
+
+.Lig11_debut_hs_t21 {
+  width : 44.2px;
+/*  border-right : 1px solid maroon; */
+  float : left;
+}
+.Lig11_debut_ast {
+  border-left : 1px solid maroon;
+  border-top : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+  width : 105px;
+  height : 100%;
+  float : left;
+  display : block;
+}
+.Lig11_debut_ast_t2 {
+  display : in-line;
+}
+.Lig11_debut_ast_t21, .Lig11_debut_ast_t22, .Lig11_debut_ast_t23 {
+  width : 30px;
+  margin-left : 3px;
+  float : left;
+/*  border : 1px solid maroon; */
+}
+.Lig11_debut_ast_t1 {
+  text-align : center;
+}
+
+.ouvre {
+/*  border : 1px solid transparent; */
+  width : 100%;
+/*  height : 1.7em;*/
+}
+.samedi {
+/*  border : 1px solid transparent; */
+  width : 100%;
+/*  height : 1.3em;     */
+}
+.dimanche {
+/*  border : 1px solid transparent;   */
+  width : 100%;
+/*  height : auto;*/
+/*  height : 1.7em; */
+}
+.Lig11col {
+  width : 100%;
+  display : in-line;
+/*  height : 1.6em; */
+}
+
+
+
+.Lig11col2 {
+  border-left : 1px solid maroon;
+/*  border-top : 1px solid maroon; */
+  border-bottom : 1px solid maroon;
+  width : 65px;
+  height : 100%;
+  text-align : 5px;
+  float : left;
+}
+
+.Lig11col3 {
+  border-left : 1px solid maroon;
+/*  border-top : 1px solid maroon; */
+  border-bottom : 1px solid maroon;
+  float : left;
+  width : 40px;
+  height : 100%;
+/*  text-align : center;   */
+}
+.Lig11_debut_col3 {
+  border-left : 1px solid maroon;
+/*  border-top : 1px solid maroon;     */
+  border-bottom : 1px solid maroon;
+  float : left;
+  width : 40px;
+  height : 100%;
+  text-align : center;
+}
+.Lig11col2 span, .Lig11col3 span {
+  vertical-align : -2px;
+}
+.Lig11col3 span {
+/*  width : 38px;
+  height : 100%; */
+  margin-left : 6px;
+}
+.Lig11_debut_col2 span, .Lig11_debut_col3 span, .Lig11_debut_col4 span, .Lig11_debut_col5 span, .Lig11col11 span {
+  vertical-align : -8px;
+}
+
+
+.Lig11col4 {
+  border-left : 1px solid maroon;
+/*  border-top : 1px solid maroon;  */
+  border-bottom : 1px solid maroon;
+  float : left;
+  width : 76px;
+  height : 100%;
+}
+
+.Lig11_debut_col4 {
+  border-left : 1px solid maroon;
+  border-top : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+  float : left;
+  width : 76px;
+  height : 100%;
+}
+
+.Lig11col5 {
+  border-left : 1px solid maroon;
+/*  border-top : 1px solid maroon; */
+  border-bottom : 1px solid maroon;
+  width : 76px;
+  height : 100%;
+  float : left;
+}
+
+.Lig11_debut_col5 {
+  border-left : 1px solid maroon;
+  border-top : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+  width : 76px;
+  height : 100%;
+  float : left;
+}
+
+
+.Lig11col6 {
+  border-left : 1px solid maroon;
+/*  border-top : 1px solid maroon; */
+  border-bottom : 1px solid maroon;
+  width : 45px;
+  height : 100%;
+  float : left;
+}
+.Lig11col7 {
+/*  border-left : 1px solid maroon; */
+/*  border-top : 1px solid maroon;  */
+  border-bottom : 1px solid maroon;
+  width : 45px;
+  height : 100%;
+  float : left;
+}
+.Lig11col8 {
+/*  border-left : 1px solid maroon;*/
+/*  border-top : 1px solid maroon; */
+  border-bottom : 1px solid maroon;
+  width : 45px;
+  height : 100%;
+  float : left;
+}
+.Lig11col9 {
+/*  border-left : 1px solid maroon;*/
+/*  border-top : 1px solid maroon; */
+  border-bottom : 1px solid maroon;
+  width : 45px;
+  height : 100%;
+  float : left;
+}
+.Lig11col10 {
+  border-left : 1px solid maroon;
+/*  border-top : 1px solid maroon;     */
+  border-bottom : 1px solid maroon;
+  width : 105px;
+  height : 100%;
+  float : left;
+  display : in-line;
+}
+.Lig11col10_1 {
+  width : 30px;
+  margin-left : 3px;
+  float : left;
+/*  border : 1px solid maroon; */
+  text-align : center;
+}
+.Lig11col10_2, .Lig11col10_3 {
+  width : 30px;
+  margin-left : 3px;
+  float : left;
+/*  border : 1px solid maroon; */
+  text-align : center;
+}
+.Lig11col11 {
+/*  border-top : 1px solid maroon; */
+  border-left : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+  border-right : 1px solid maroon;
+  width : 130px;
+  height : 100%;
+  float : left;
+}
+
+#barre_outils {
+  clear : left;
+}

@@ -1,0 +1,513 @@
+/* Fichier css externe valable pour le fichier etechnoserv.pl */
+html {
+   background-color:aqua;
+ }
+body {
+   /*background-color: maroon;*/
+   border: 5px olive solid;
+   margin : 5px;
+   padding: 2px;
+}
+div#corps {
+  position: relative;
+  width: 1017px;
+  height: 900px;
+  border: 6px red solid;
+}
+div#entete {
+  background-color: silver;
+  border: 2px blue solid;
+  float : left;
+  width: 100%;
+  z-index: 2;
+}
+div#images {
+  background-color: maroon;
+  border: 2px black solid;
+  margin: 4px;
+  width: 60%;
+  float : left;
+
+}
+div#connexion {
+ float : left;
+ border: 3px lime groove;
+ width: 37%;
+}
+
+img#logo {
+  float: left;
+  background-color: yellow;
+  border: 1px cyan solid;
+}
+img#slogan {
+  float: left;
+  background-color: red;
+  border: 1px orange solid;
+}
+div#gauche {
+  float : left;
+  width: 130px;
+  height: 200px;
+  border: 4px green solid;
+  z-index: 10;
+}
+div#droite {
+  float : left;
+  border: 5px black solid;
+  width: 860px;
+  height: 675px;
+/*  overflow : scroll; */
+  background-image :url(../images/ellipse_h.gif);
+  background-repeat : no-repeat;
+  z-index: 0;
+}
+
+div#droite object {
+  width: 840px;
+  height: 615px;
+  background-color: transparent;
+  z-index: auto;
+
+}
+
+
+div#basdepage {
+  background-color: silver;
+  border: 2px blue solid;
+  position: absolute;
+  left: 0;
+  bottom : 0;
+  width: 100%;
+}
+
+
+/* Style pour le menu de gauche */
+
+#menu p {
+  display: none;
+}
+#menu {
+  font-family: Verdana, Helvetica, Arial, sans-serif;
+  font-size: 0.7em;
+  font-weight: bold;
+  width: 130px;
+  border-right: 1px solid #666;
+  padding: 0;
+  margin-bottom: 1em;
+  color: #333;
+  z-index: 15;
+}
+#menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 130px;
+}
+
+#menu li {
+  margin: 0;
+  border-top: 1px solid #003;
+  width: 130px;
+}
+#menu li ul{
+  display: none;
+  position : absolute;
+  margin: -19px 0 0 130px;
+}
+
+#menu ul li a {
+  display: block;
+  padding: 2px 2px 2px 0.5em;
+  border-left: 10px solid #369;
+  border-right: 1px solid #69c;
+  border-bottom: 1px solid #369;
+  background-color: #036;
+  color: #fff;
+  text-decoration: none;
+  width: 100%;
+  z-index: 15;
+}
+html>body #menu ul li a {
+  width: auto;
+}
+
+#menu ul li a:hover {
+  border-left: 10px solid #036;
+  border-right: 1px solid #69c;
+  border-bottom: 1px solid #369;
+  background-color: #036;
+  color: #fff;
+}
+
+#gauche #menu #menu_object {
+  z-index : 20;
+}
+
+#droite form {
+  margin-top : 5%;
+  margin-left : 2%;
+/*  overflow : scroll;*/
+}
+
+#connexion div {
+  font-size: 0.7em;
+  font-weight: bolder;
+}
+
+#connexion div em {
+  color: red;
+  margin-left : 10px;
+}
+
+#affiche_donnees_sociales {
+  border: 1px green solid;
+}
+
+form > #affiche_donnees_sociales {
+  height: 258px;
+}
+
+
+#infos_generales {
+  border: 1px orange solid;
+}
+
+#col_gauche {
+ float : left;
+  width : 30%;
+  border: 2px blue solid;
+  text-align: right;
+}
+#col_droite {
+/*  float: left;*/
+/*  width: 20%; */
+  border: 2px red solid;
+}
+
+#affiche_conges_payes {
+  border: 1px maroon solid;
+  width: 45%;
+  float: left;
+}
+
+#affiche_rtt {
+  border: 1px teal solid;
+  width: 50%;   /*Modifié le 21/06 */
+  float : left; /*Ajouté le 21/06 */
+}
+
+.Titre {
+  width: 100%;
+  border : 3px black solid;
+  text-align: center;
+  font-weight: bold;
+  color: orange;
+}
+.Libelle {
+  float: left;
+  border: 2px blue solid;
+  width : 40%;
+  font-weight: bold;
+}
+.Acquis {
+  float: left;
+  border: 2px orange solid;
+  width: 15%;
+}
+.Pris {
+  float: left;
+  border : 2px yellow solid;
+  width : 15%;
+}
+.A_prendre {
+  border : 2px cyan solid;
+  float : left; /*A jouter le 21/06 */
+/* width: 25%; */
+}
+
+.L1 {
+  font-weight: bold;
+}
+/* CSS pour pour le menu Menu_gestion_compte */
+#Menu_gestion_compte ul {
+  margin-left: 0;
+  padding: 3px 0;
+  border-bottom: 1px solid #778;
+  font: bold 12px Verdana, sans-serif;
+}
+
+
+#Menu_gestion_compte ul li {
+  list-style-type: none;
+  padding-right: 5px;
+  display: inline;
+}
+
+
+#Menu_gestion_compte ul li a {
+  padding: 3px 0.5em;
+  margin-left: 3px;
+  border: 1px solid #778;
+  border-bottom: none;
+  background: #DDE;
+  text-decoration: none;
+}
+
+#Menu_gestion_compte ul li a:link {
+  color: #448;
+}
+#Menu_gestion_compte ul li a:visited {
+  color: #667;
+}
+#Menu_gestion_compte ul li a:link:hover,
+#Menu_gestion_compte ul li a:visited:hover {
+  color: #000;
+  background: #AAE;
+  border-color: #227;
+}
+
+#Menu_gestion_compte ul li#active {
+/*  background-color: white;*/
+/*    border: 1px solid white; */
+}
+
+
+#Menu_gestion_compte ul li a#courant {
+  background-color: white;
+  border-bottom: 1px solid white;
+}
+
+/*********** Menu compte ****************************************************/
+#Identification, #Communication, #Missions, #Mot_de_passe {
+/*  border: 2px solid blue;*/
+}
+
+.menu_enregistrer, .menu_droit_bas{
+  margin-top : 1em;
+  margin-left : 2em;
+  clear : left; /* Ajuter le 21/06/06 */
+}
+
+.infos {
+  width: 60%;
+/*  border: 1px solid olive;*/
+  float: left;
+/*  font-size: 1.1em;*/
+}
+
+.Ligne2col {
+  width : 100%;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  padding-left: 2px;
+}
+.Ligne2col1 {
+  float : left;
+  font-weight: bold;
+  width: 40%;
+}
+
+#derniere_ligne {
+  border-bottom: 1px solid black;
+  float: left;
+}
+
+.msg_erreur {
+  width : 100%;
+  border : 1px solid green;
+  color : red;
+  font-size: 0.7em;
+}
+
+/*****************************************************************************/
+#ra_ecran_mensuel {
+  width: 100%;
+  height:  9em;
+/*  border: 2px solid orange;*/
+ margin-top : 2em;
+}
+.ra_titre_ecran_mensuel {
+  width: 100%;
+  text-align: center;
+  font-size: 1.2em;
+  color: blue;
+/*  border : 1px solid teal;     */
+}
+.ra_ligne3col {
+  width: 100%;
+  height: 1.2em;
+  margin-bottom: 0;
+}
+
+.ra_ligne3col a {
+  text-decoration :none;
+  margin : 3px;
+  padding : 2px;
+}
+
+.ra_ligne3col a img {
+  border-style : none;
+  vertical-align : bottom;
+}
+
+
+#ligne1 {
+  height : 1.2em;
+  font-weight : bold;
+/*  margin-top : 0.5em;*/
+  text-align : center;
+}
+#ligne_fin {
+  border-bottom : 2px solid maroon;
+}
+.ra_ligne3col1 {
+  width: 40%;
+  float : left;
+  padding-left : 10px;
+  border-top : 1px solid maroon;
+  border-left: 1px solid maroon;
+}
+.ra_ligne3col2 {
+  width: 30%;
+  float: left;
+  padding-left : 10px;
+  border-top : 1px solid maroon;
+  border-left: 1px solid maroon;
+}
+.ra_ligne3col2 a, #ra_ligne3col2_fin a {
+  border : 1px groove transparent;
+}
+.ra_ligne3col2 a:hover, #ra_ligne3col2_fin a:hover {
+  border : 1px inset transparent;
+}
+
+
+.ra_ligne3col3 {
+  width: 20%;
+  height : 100%;
+  float : left;
+  padding-left : 10px;
+  border-top : 1px solid maroon;
+  border-left: 1px solid maroon;
+  border-right: 1px solid maroon;
+
+}
+
+#ra_ligne3col1_fin {
+  width: 40%;
+  float : left;
+  padding-left : 10px;
+  border-top : 1px solid maroon;
+  border-left: 1px solid maroon;
+  border-bottom: 1px solid maroon;
+}
+#ra_ligne3col2_fin {
+  width: 30%;
+  float: left;
+  padding-left : 10px;
+  border-top : 1px solid maroon;
+  border-left: 1px solid maroon;
+  border-bottom: 1px solid maroon;
+/*  text-align: center; */
+}
+#ra_ligne3col3_fin {
+  width: 20%;
+  float : left;
+  padding-left : 10px;
+  border : 1px solid maroon;
+}
+
+/* Styles pour le menu de gestion des RA */
+#menu_gestion_ra {
+  width : 100%; /*Il faut absolument fixer des tailles sinon gros prob */
+  height : 3em;
+  position : relative;
+/*  border : 2px dotted green; */
+}
+.menu_droit_bas {
+  margin-top : 3em;
+}
+#menu_gestion_ra ul {
+  margin : 0;
+  padding : 0;
+/*  width : 30.1em; */
+  width : 100%;
+  list-style-type: none;
+  border : 1px solid #808080;
+  height : 1.2em;
+  background-color : #DDDDEE;
+}
+#menu_gestion_ra  ul li {
+  float : left;
+/*  width : 6em;/*Il faut absolument fixer des tailles sinon gros prob */
+  height : auto;
+}
+
+#menu_gestion_ra ul li a {
+/*  text-align : center; */
+  text-decoration :none;
+/*  width : 6em;*/
+  padding-left : 2em;
+  padding-right : 2em;
+  color : blue;
+}
+
+
+
+#menu_gestion_ra li#active {
+  background-color : #8888BB;
+  border-left : 1px solid black;
+  border-right : 1px solid black;
+}
+#menu_gestion_ra li:hover, #menu_gestion_ra a:hover {
+  background-color : #AAAAEE;
+}
+
+#menu_gestion_ra li#active a.active, #menu_gestion_ra li#actif a {
+  color : purple;
+}
+#menu_gestion_ra ul ul {
+  position : absolute;
+  border : 1px solid blue;
+  margin : 0;
+  padding : 0;
+  top : 1.3em;
+  left: 0;
+  width : 47em;
+  height : 1.2em;
+  background-color : transparent;
+}
+
+#menu_gestion_ra ul li li {
+  display : inline;
+/*  height : 1em; */
+  float : none;
+}
+
+#menu_gestion_ra ul li li a {
+  padding-left : .5em;
+  padding-right : .5em;
+}
+
+#menu_gestion_ra ul li a:visited {
+  color : blue;
+}
+#menu_gestion_ra li .menu_gestion_ra_mois {
+  display: none;
+}
+
+#menu_gestion_ra li#active .menu_gestion_ra_mois {
+  display: inline;
+}
+
+#menu_gestion_ra ul li li#actif {
+  background-color : #CCBBBB;
+  border-left : 1px solid blue;
+  border-right : 1px solid blue;
+}
+#menu_gestion_ra ul li li.inactif {
+  background-color : #808080;
+  cursor : default;
+}

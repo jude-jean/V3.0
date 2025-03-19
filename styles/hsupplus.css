@@ -1,0 +1,35 @@
+/********** hsupplus.pl ************************************************************/
+#titre_hsupplus {
+  font-weight : bold;
+/*  font-size : large;*/
+  margin-left : 40px;
+}
+
+#l1_hsupplus {
+  margin-top : 20px;
+  margin-bottom : 10px;
+}
+#exposant {
+  vertical-align : super;
+  font-size : x-small;
+}
+#l1_hsupplus span {
+/*  text-decoration : underline; */
+  color : #ff850a;
+}
+
+#choix {
+  margin-left : 90px;
+}
+#choix span{
+  margin-right : 3px;
+}
+
+#bouton {
+  margin-top : 15px;
+  margin-left : 100px;
+}
+
+#bouton input {
+  margin-left : 10px;
+}

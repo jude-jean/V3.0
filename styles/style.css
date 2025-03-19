@@ -1,0 +1,23 @@
+.tdright {
+	border-bottom-color: #333333;
+	border-left-color: #333333;
+	border-top-color: #333333;
+}
+.tdleft {
+	border-top-color: #333333;
+	border-right-color: #333333;
+	border-bottom-color: #333333;
+}
+.tdtop {
+	border-right-color: #333333;
+	border-bottom-color: #333333;
+	border-left-color: #333333;
+}
+.tdbottom {
+	border-top-color: #333333;
+	border-right-color: #333333;
+	border-left-color: #333333;
+}
+.tdmiddle {
+	border: #333333;
+}

@@ -1,0 +1,35 @@
+/********** Test DHTML.pl ************************************************************/
+#entete {
+	width : 400px;
+	height : 50px;
+	border : 1px gray dashed;
+}
+#cadre {
+	border : 1px solid red;
+/*	height : 200px; */
+	width : 400px;
+}
+.ligne {
+	background-color : #F2F2F2;
+	border-top : 1px solid #808080;
+	border-left : 1px solid #808080;
+	border-right : 1px solid #808080;	
+	width : auto; 
+	height : 20px;
+	position : relative;
+/*	float : left; */
+}
+
+.ligne:hover {
+	background-color : #AAAAEE;
+}
+#rdv {
+	position : absolute;
+	width : 400px;
+	height : 60px;
+	background-color :  #FFECB3;
+	border : 1px solid #FFDF80;
+	top : 206px;
+	z-index : 10;
+}
+	

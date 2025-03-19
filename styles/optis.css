@@ -1,0 +1,37 @@
+/********  Fichier css pour le module Optis ***************/
+#tbgeos {
+	display : table;
+	border-collapse:collapse;	
+	width : 600px;
+	border: 1px solid gray;
+	margin-top : 20px;
+}
+#legeos {
+	display : table-caption;
+	caption-side : bottom;
+	margin-top : 10px;
+	margin-left : 200px;
+/*	width : 400px; */
+}
+#l1geos {
+	display : table-header-group;
+	font-weight : bold;	
+}
+#footgeos {
+	display : table-footer-group;
+}
+
+.ligeos {
+	display : table-row;
+}
+.ligeos span, #l1geos span {
+	display : table-cell;
+	border: 1px solid gray;
+}
+.ligeos span:last-child, #l1geos span:last-child {
+	text-align : center;
+}
+.ligeos span {
+	padding-left : 5px;
+/*	border : 1px solid red; */
+}

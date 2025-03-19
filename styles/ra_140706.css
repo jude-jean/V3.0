@@ -1,0 +1,701 @@
+/********** ra.pl ************************************************************/
+#ecran {
+  border : 1px solid black;
+/*  display : block;  */
+  width : 800px;
+  
+}
+
+#logo {
+/*  display : block;*/
+  display : none;
+/*  text-align : center;
+  border : 1px solid red;*/
+}
+
+/******************** Instruction pour l'entete *****************************/
+/* L'entete est constitué d'une ligne de titre ent_lig1 puis de 2 colonnes
+ent_lig2col1 et ent_lig2col2 dans lesquelles se trouvent les classe cel1 et
+cel2
+*/
+#entete {
+  margin-bottom : 0;
+  border : 1px solid blue;
+  height : 62px;
+}
+#entete span {
+  margin-left : 2px;
+}
+#ent_lig1 span {
+  margin-top : 5px;
+  margin-bottom : 0;
+  margin-left : 250px;
+  font-weight : bold;
+  font-size : 1.2em;
+}
+
+#ent_lig2col1 {
+/*  border : 1px solid red;*/
+  float : left;
+  width : 300px;
+/*  height : 50px;*/
+  margin-left : 40px;
+}
+
+#ent_lig2col2 {
+/*  border : 1px solid yellow; */
+  width : 400px;
+/*  height : 50px;  */
+  float : left;
+}
+#ent_lig2col1 .cel1 {
+  margin-left : 60px;
+/*  border : 1px solid purple;*/
+}
+#ent_lig2col1 .cel2 {
+  margin-left : 60px;
+  clear : left;
+}
+#ent_lig2col1 label, #ent_lig2col2 label {
+  font-weight : bold;
+}
+#ent_lig2col1 label {
+/*  border : 1px solid green; */
+  display : block;
+  float : left;
+  width : 65px;
+  text-align : right;
+}
+#ent_lig2col1  span {
+/*  border : 1px solid maroon;*/
+  display : block;
+  float : left;
+  width : 160px;
+}
+#ent_lig2col2 .cel2 {
+  clear : left;
+}
+#ent_lig2col2 label {
+/*  border : 1px solid green;     */
+  display : block;
+  float : left;
+  width : 65px;
+  text-align : right;
+}
+
+#ent_lig2col2  span {
+/*  border : 1px solid maroon;*/
+  display : block;
+  float : left;
+  width : 230px;
+}
+#cel2_glob {
+  margin-left : 20px;
+  font-weight : bold;
+}
+
+/****************************************************************************/
+form {
+  margin-top : 0;
+}
+#menu_actions {
+  clear : left;
+  margin-left : 45px;
+/*  border : 1px solid red; */
+  margin-top : 5px;
+}
+#barre_outils {
+  clear : left;
+  margin-left : 40px;
+  margin-top : 5px;
+  font-size : 0.8em;
+  height : 40px;
+/*  border : 1px solid yellow; */
+}
+form > #barre_outils {
+  height : 52px;
+/*  border : 1px solid red;        */
+}
+
+#barre_outils select, #barre_outils input  {
+  font-size : 0.8em;
+}
+#barre_outils #remplir {
+  width : 180px;
+  margin-right : 0px;
+  float : left;
+}
+#barre_outils #selectionner{
+  width : 230px;
+  margin-right : 0;
+  margin-left : 7px;
+  float : left;
+}
+#barre_outils #appliquer_selection {
+  width : 50px;
+  margin-left : 7px;
+/*  float :left;*/
+}
+#titre_decompte {
+  height : 2.8em;
+}
+#titre_decompte .Lig11_debut_ast {
+  border-right : 1px solid maroon;
+  background-color : white;
+}
+#titre_decompte .Lig11_debut_hs {
+  background-color : white;
+}
+
+#decompte_jours_client, #decompte_jours_ts, #decompte_jours_global, .data_client {
+  clear : left;
+}
+#titre_ouvres, #data_ouvres {
+  width : 65px;
+  height : 100%;
+  float : left;
+}
+.data_client_ouvres {
+  width : 65px;
+}
+
+#titre_presence, #data_presence{
+  width : 72px;
+  height : 100%;
+  float : left;
+}
+
+.data_client_presence  {
+  width : 72px;
+}
+
+#titre_dispo, #data_dispo {
+  width : 80px;
+  height : 100%;
+  float : left;
+}
+
+.data_client_dispo {
+  width : 80px;
+}
+#titre_ouvres, #titre_presence, #titre_dispo {
+  border-left : 1px solid maroon;
+  border-top : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+}
+#data_ouvres, #data_presence, #data_dispo, #data_hsup0, #data_hsup25, #data_hsup50, #data_hsup100, #data_ast1, #data_ast2 {
+  border-left : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+  text-align : center;
+}
+
+
+.data_client_ouvres, .data_client_presence, .data_client_dispo, .data_client_hsup0, .data_client_hsup25, .data_client_hsup50, .data_client_hsup100, .data_client_ast1, .data_client_ast2 {
+  border-left : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+  text-align : center;
+}
+.data_client_nom {
+  border-left : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+}
+.data_client_nom span, #data_ra_global span {
+  margin-left : 5px;
+}
+#data_hsup0, .data_client_hsup0{
+  width : 40px;
+}
+#data_hsup25, #data_hsup50, .data_client_hsup25, .data_client_hsup50  {
+  width : 46px;
+}
+#data_hsup100, .data_client_hsup100 {
+  width : 48px;
+}
+#data_ast1, .data_client_ast1{
+  width : 34px;
+}
+#data_ast2, .data_client_ast2{
+   width :  33px;
+ }
+#data_ast3, .data_client_ast3 {
+  width : 38px;
+  border-left : 1px solid maroon;
+  border-right : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+  text-align: center;
+}
+/*#data_decompte > #data_ast3 {
+  width : 39px;
+}
+*/
+#data_decompte input, #data_absence input {
+  text-align : center;
+}
+
+#data_decompte > #data_hsup0, .data_client > .data_client_hsup0{
+  width : 40px;
+}
+#data_decompte > #data_hsup25, #data_decompte > #data_hsup50, .data_client > .data_client_hsup25, .data_client > .data_client_hsup50 {
+  width : 45px;
+}
+#data_decompte > #data_hsup100, .data_client > .data_client_hsup100 {
+  width : 47px;
+}
+#data_decompte > #data_ast1, .data_client > .data_client_ast1{
+  width : 33px;
+}
+#data_decompte > #data_ast2, .data_client > .data_client_ast2{
+   width :  32px;
+ }
+#data_decompte input, #data_absence input {
+  width : 30px;
+}
+#data_decompte > #data_ast3, .data_client > .data_client_ast3 {
+  width : 38px;
+  border-left : 1px solid maroon;
+  border-right : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+}
+
+#titre_ouvres span, #titre_presence span, #titre_dispo span {
+  vertical-align : -8px;
+}
+#data_decompte{
+  clear : left;
+/*  height : 1.2em;*/
+}
+
+#data_ouvres, #data_presence, #data_dispo, #data_hsup0, #data_hsup25, #data_hsup50, #data_hsup100, #data_ast1, #data_ast2, #data_ast3 {
+  float : left;
+}
+#titre_ra_global, #data_ra_global, .data_client_nom{
+  float : left;
+  width : 170px;
+}
+
+#data_ra_global {
+  border-left : 1px solid maroon;
+  border-top : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+  margin-top : -1px;
+/*  text-align : 5px; */
+}
+#data_decompte > #data_ra_global, #data_decompte > #titre_ra_global, .data_client > .data_client_nom {
+  width : 169px;
+}
+
+.data_client_ouvres, .data_client_presence, .data_client_dispo, .data_client_hsup0, .data_client_hsup25, .data_client_hsup50, .data_client_hsup100, .data_client_ast1, .data_client_ast2, .data_client_ast3 {
+  float : left;
+}
+
+
+
+#titre_absence, #data_absence {
+  clear : left;
+/*  display : inline;*/
+}
+#titre_absence {
+  padding-top : 2px;
+}
+#titre_total_absence, #data_total_absence {
+  float : left;
+  width : 36px;
+}
+#titre_cp, #data_cp {
+  float : left;
+  width : 90px;
+}
+#titre_rtt, #data_rtt {
+  float : left;
+  width : 35px;
+}
+#titre_maladie, #data_maladie {
+  float : left;
+  width : 60px;
+}
+#titre_recup, #data_recup {
+  float : left;
+  width : 85px;
+  
+}
+#titre_formation, #data_formation {
+  float : left;
+  width : 75px;
+}
+#titre_excep, #data_excep {
+  float : left;
+  width : 86px;
+}
+#titre_sssolde, #data_sssolde {
+  float : left;
+  width : 75px;
+}
+#titre_total_absence, #titre_cp, #titre_rtt, #titre_maladie, #titre_recup, #titre_formation, #titre_excep, #titre_excep {
+  border-left : 1px solid maroon;
+  border-top : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+/*  border-color : maroon;
+  border-style : outset none outset inset;
+  border-width : 1.5px;*/
+  text-align : center;
+}
+#titre_sssolde {
+  border : 1px solid maroon;
+  text-align : center;
+}
+#data_sssolde {
+  border-left : 1px solid maroon;
+  border-right : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+  text-align : center;
+}
+#data_total_absence, #data_cp, #data_rtt, #data_maladie, #data_recup, #data_formation, #data_excep, #data_excep {
+  border-left : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+  text-align : center;
+}
+/****************************************************************************/
+
+#tableau {
+/*  display : block;    */
+  width : 800px;
+  height : 100%;
+  font-size : 0.8em;
+  background-color : aqua;
+  background-image :url(../images/ellipse_h.gif);
+  background-repeat : no-repeat;
+  clear : left;
+/*  border : 3px solid blue; */
+}
+
+#tableau select {
+  font-size : 0.8em;
+}
+#tableau input {
+  font-size : 0.8em;
+  margin-left : 3px;
+}
+
+.Lig11_debut {
+  font-weight : bold;
+  width : 100%;
+  height : 2.8em;
+
+}
+
+.Lig11_debut_hs {
+  border-left : 1px solid maroon;
+  border-top : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+  width : 180px;
+  height : 100%;
+  float : left;
+  display : block;
+  text-align : center;
+  background-color : #FFAA66;
+}
+.Lig11_debut_col2 {
+  width : 65px;
+  height : 100%;
+  border-left : 1px solid maroon;
+  border-top : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+  float : left;
+  background-color : #FFAA66;
+}
+
+.Lig11_debut_hs_t1, .Lig11_debut_ast_t1 {
+  width : 100%;
+  border-bottom : 1px solid maroon;
+}
+.Lig11_debut_hs_t2, .Lig11_debut_ast_t2 {
+  width : 100%;
+/*  height : 100%; */
+  display : inline;
+}
+
+.Lig11_debut_hs_t21 {
+  width : 44.2px;
+/*  border-right : 1px solid maroon; */
+  float : left;
+}
+.Lig11_debut_ast {
+  border-left : 1px solid maroon;
+  border-top : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+  width : 105px;
+  height : 100%;
+  float : left;
+  display : block;
+  background-color : #FFAA66;
+}
+.Lig11_debut_ast_t2 {
+  display : inline;
+}
+.Lig11_debut_ast_t21, .Lig11_debut_ast_t22, .Lig11_debut_ast_t23 {
+  width : 30px;
+  margin-left : 3px;
+  float : left;
+/*  border : 1px solid maroon; */
+}
+.Lig11_debut_ast_t1 {
+  text-align : center;
+}
+
+.ouvre, .ferie {
+/*  border : 1px solid transparent;*/
+  width : 100%;
+  clear : left;
+/*  height : 1.6em; */
+}
+.samedi {
+/*  border : 1px solid transparent; */
+  width : 100%;
+  clear : left;
+/*  height : 1.6em;     */
+}
+.dimanche {
+/*  border : 1px solid transparent; */
+  width : 100%;
+  clear : left;
+/*  height : 1.6em;*/
+}
+/* Gestion de Internet Explorer */
+#tableau > .ouvre, #tableau > .samedi, #tableau > .dimanche, #tableau >.ferie {
+/*  border : 1px solid maroon; */
+  height : 1.6em;
+}
+
+.Lig11col {
+  width : 100%;
+  display : inline;
+  height : 100%;
+/*  height : 1.6em; */
+}
+
+.Lig11col2 {
+  border-left : 1px solid maroon;
+/*  border-top : 1px solid maroon; */
+  border-bottom : 1px solid maroon;
+  width : 65px;
+  height : 100%;
+/*  text-align : 5px;   */
+  float : left;
+}
+
+.Lig11col3 {
+  border-left : 1px solid maroon;
+/*  border-top : 1px solid maroon;     */
+  border-bottom : 1px solid maroon;
+  float : left;
+  width : 40px;
+  height : 100%;
+/*  text-align : center;   */
+}
+.Lig11_debut_col3 {
+  border-left : 1px solid maroon;
+  border-top : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+  float : left;
+  width : 40px;
+  height : 100%;
+  text-align : center;
+  background-color : #FFAA66;
+}
+.Lig11col2 span, .Lig11col3 span, .Lig11col4 span, .Lig11col5 span {
+  vertical-align : -2px;
+}
+.Lig11col3 span {
+/*  width : 38px;
+  height : 100%; */
+  margin-left : 6px;
+}
+.Lig11_debut_col2 span, .Lig11_debut_col3 span, .Lig11_debut_col4 span, .Lig11_debut_col5 span, .Lig11_debut_col11 span, .ferie .Lig11col4 span {
+  vertical-align : -8px;
+}
+
+
+.Lig11col4, .Lig11col4_resa {
+/*  border-left : 1px solid maroon; */
+/*  border-top : 1px solid maroon;     */
+/*  border-bottom : 1px solid maroon;   */
+  float : left;
+  width : 108px;
+  height : 100%;
+}
+
+.Lig11_debut_col4 {
+  border-left : 1px solid maroon;
+  border-top : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+  float : left;
+  width : 108px;
+  height : 100%;
+  background-color : #FFAA66;
+}
+
+.Lig11col5, .Lig11col5_resa {
+/*  border-left : 1px solid maroon; */
+/*  border-top : 1px solid maroon; */
+/*  border-bottom : 1px solid maroon;   */
+  width : 108px;
+  height : 100%;
+  float : left;
+}
+
+.Lig11col4_resa, .Lig11col5_resa {
+  background-color : #FFCC99;
+}
+
+.Lig11_debut_col5 {
+  border-left : 1px solid maroon;
+  border-top : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+  width : 108px;
+  height : 100%;
+  float : left;
+  background-color : #FFAA66;
+}
+.Lig11col4_ferie_ouvre, .ferie .Lig11col4 {
+  width : 216px;
+  float : left;
+  height : 100%;
+  text-align : center;
+  border-left : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+  border-right : 1px solid #FF9999;
+  background-color : #FF9999;
+}
+.Lig11col4_ferie_samedi {
+  width : 216px;
+  float : left;
+  height : 100%;
+  text-align : center;
+}
+.Lig11col4_ferie_dimanche {
+  width : 216px;
+  float : left;
+  height : 100%;
+  text-align : center;
+}
+
+.ouvre .Lig11col4, .ouvre .Lig11col5, .ouvre .Lig11col4_resa, .ouvre .Lig11col5_resa  {
+  border-bottom : 1px solid maroon;
+  border-left : 1px solid maroon;
+}
+.samedi .Lig11col4 {
+  border-left : 1px solid maroon;
+  border-bottom : 1px solid #DADADA;
+  background-color : #DADADA;
+}
+.dimanche .Lig11col4 {
+  border-left : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+  background-color : #DADADA;
+
+}
+.samedi .Lig11col5 {
+  border-left : 1px solid #DADADA;
+  border-bottom : 1px solid #DADADA;
+  background-color : #DADADA;
+}
+.dimanche .Lig11col5 {
+  border-left : 1px solid #DADADA;
+  border-bottom : 1px solid maroon;
+  background-color : #DADADA;
+}
+
+.Lig11col6 {
+  border-left : 1px solid maroon;
+/*  border-top : 1px solid maroon;     */
+  border-bottom : 1px solid maroon;
+  width : 45px;
+  height : 100%;
+  float : left;
+}
+.Lig11col7 {
+/*  border-left : 1px solid maroon; */
+/*  border-top : 1px solid maroon;*/
+  border-bottom : 1px solid maroon;
+  width : 45px;
+  height : 100%;
+  float : left;
+}
+.Lig11col8 {
+/*  border-left : 1px solid maroon;*/
+/*  border-top : 1px solid maroon;    */
+  border-bottom : 1px solid maroon;
+  width : 45px;
+  height : 100%;
+  float : left;
+}
+.Lig11col9 {
+/*  border-left : 1px solid maroon;*/
+/*  border-top : 1px solid maroon; */
+  border-bottom : 1px solid maroon;
+  width : 45px;
+  height : 100%;
+  float : left;
+}
+.Lig11col10 {
+  border-left : 1px solid maroon;
+/*  border-top : 1px solid maroon;     */
+  border-bottom : 1px solid maroon;
+  width : 105px;
+  height : 100%;
+  float : left;
+  display : inline;
+}
+.Lig11col10_1 {
+  width : 30px;
+  margin-left : 3px;
+  float : left;
+/*  border : 1px solid maroon; */
+  text-align : center;
+}
+.Lig11col10_2, .Lig11col10_3 {
+  width : 30px;
+  margin-left : 3px;
+  float : left;
+/*  border : 1px solid maroon; */
+  text-align : center;
+}
+.Lig11col11 {
+  border-left : 1px solid maroon;
+  border-bottom : 1px solid maroon;
+  border-right : 1px solid maroon;
+  width : 130px;
+  height : 100%;
+  float : left;
+}
+.Lig11_debut_col11 {
+  border : 1px solid maroon;
+  width : 130px;
+  height : 100%;
+  float : left;
+  background-color : #FFAA66;
+}
+/******************** Bloc signatures ****************************************/
+#signature_collaborateur {
+  display : none;
+/*  float : left;
+  font-weight : bold;
+  font-size : 0.8em;
+  width : 30%;
+*/
+}
+
+#signature_societe {
+  display : none;
+/*
+  float : left;
+  font-weight : bold;
+  font-size : 0.8em;
+  width : 60%;
+*/
+}
+.signature {
+  border : 1px solid black;
+  width : 80%;
+  height : 100px;
+}
