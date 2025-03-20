@@ -1413,7 +1413,7 @@ sub affiche_decompte_jours {
   else { # Pour T&S ou un RA global
     print $::cgi->start_div({-id => 'titre_absence'}), $::cgi->p('D&eacute;tail des absences');
 #    print $::cgi->div({-id=>'titre_total_absence'},$::cgi->span('Total')), $::cgi->div({-id => 'titre_cp'}, 'Cong�s pay�s'), $::cgi->div({-id =>'titre_rtt'}, 'RTT'), $::cgi->div({-id=>'titre_maladie'}, 'Maladie');
-    print $::cgi->div({-id=>'titre_total_absence'},'Total'), $::cgi->div({-id => 'titre_cp'}, 'Cong�s pay�s'), $::cgi->div({-id =>'titre_rtt'}, 'RTT'), $::cgi->div({-id=>'titre_maladie'}, 'Maladie');
+    print $::cgi->div({-id=>'titre_total_absence'},'Total'), $::cgi->div({-id => 'titre_cp'}, 'Cong&eacute;s pay&eacute;s'), $::cgi->div({-id =>'titre_rtt'}, 'RTT'), $::cgi->div({-id=>'titre_maladie'}, 'Maladie');
     print $::cgi->div({-id => 'titre_recup'}, 'R&eacute;cup&eacute;ration'), $::cgi->div({-id =>'titre_formation'}, 'Formation'), $::cgi->div({-id=>'titre_excep'}, 'Abs. except.'), $::cgi->div({-id=>'titre_sssolde'}, 'Sans solde');
     print $::cgi->end_div(); #Fin du div titre_absence
     if($::parametres{action} eq 'affichage') {

@@ -349,13 +349,21 @@ sub affiche_ecran_mensuel {
   foreach (@clients) {
     print $main::cgi->div({-class =>'ra_ligne3col'});
     if(($_->[2] > 0) && (($_->[3] == 0) || ($_->[3] == 2))) {
-    print $main::cgi->div({-class => 'ra_ligne3col1'}, $main::cgi->a({-target =>'Edition', -title => 'Editer', -href => "$::rep_pl/rapports_activites/ra/show.pl?ident_user=$main::collaborateur[3]&action=edition&annee=$annee_active&mois=$mois_actif&client_id=$_->[1]&ra_id=$_->[2]&ident_id=$main::id"},"$_->[0]"));
-    print $main::cgi->start_div({-class => 'ra_ligne3col2'}), $main::cgi->a({-target =>'Edition', -href => "$::rep_pl/rapports_activites/ra/show.pl?ident_user=$main::collaborateur[3]&action=edition&annee=$annee_active&mois=$mois_actif&nb_jours=$nb_jours&mois_num=$mois_actif_num&client_id=$_->[1]&ra_id=$_->[2]&ident_id=$main::id"}, $main::cgi->img({-src =>"$main::rep/images/page_edit.png", -alt => "Editer-$_->[0]", -title => 'Editer'})),
-           "&nbsp", $main::cgi->a({-target =>'Suppression', -title => 'Supprimer', -href => "$::rep_pl/rapports_activites/ra/delete.pl?ident_user=$::collaborateur[3]&action=suppression&annee=$annee_active&mois=$mois_actif&client_id=$_->[1]&ra_id=$_->[2]&ident_id=$::id"}, $main::cgi->img({-src =>"$main::rep/images/page_delete.png", -alt => "Supprimer-$_->[0]", -title => 'Supprimer'})),
-           "&nbsp", $main::cgi->a({-target =>'Facturation', -title => 'Facturer', -href => "$::rep_pl/rapports_activites/ra/facture.pl?ident_user=$::collaborateur[3]&action=facture&annee=$annee_active&mois=$mois_actif&client_id=$_->[1]&ra_id=$_->[2]&ident_id=$::id"}, $main::cgi->img({-src =>"$main::rep/images/euro-16.png", -alt => "Facturer-$_->[0]", -title => 'Facturer'})),
-           $main::cgi->end_div();
-    print $main::cgi->div({-class => 'ra_ligne3col3'},'A valider');
-    }
+      print $main::cgi->div({-class => 'ra_ligne3col1'}, $main::cgi->a({-target =>'Edition', -title => 'Editer', -href => "$::rep_pl/rapports_activites/ra/show.pl?ident_user=$main::collaborateur[3]&action=edition&annee=$annee_active&mois=$mois_actif&client_id=$_->[1]&ra_id=$_->[2]&ident_id=$main::id"},"$_->[0]"));
+      if($_->[0] !~ "Technologies et Services") { # Pas de facturation pour Technologies et Services
+        print $main::cgi->start_div({-class => 'ra_ligne3col2'}), $main::cgi->a({-target =>'Edition', -href => "$::rep_pl/rapports_activites/ra/show.pl?ident_user=$main::collaborateur[3]&action=edition&annee=$annee_active&mois=$mois_actif&nb_jours=$nb_jours&mois_num=$mois_actif_num&client_id=$_->[1]&ra_id=$_->[2]&ident_id=$main::id"}, $main::cgi->img({-src =>"$main::rep/images/page_edit.png", -alt => "Editer-$_->[0]", -title => 'Editer'})),
+              "&nbsp", $main::cgi->a({-target =>'Suppression', -title => 'Supprimer', -href => "$::rep_pl/rapports_activites/ra/delete.pl?ident_user=$::collaborateur[3]&action=suppression&annee=$annee_active&mois=$mois_actif&client_id=$_->[1]&ra_id=$_->[2]&ident_id=$::id"}, $main::cgi->img({-src =>"$main::rep/images/page_delete.png", -alt => "Supprimer-$_->[0]", -title => 'Supprimer'})),
+              "&nbsp", $main::cgi->a({-target =>'Facturation', -title => 'Facturer', -href => "$::rep_pl/rapports_activites/ra/facture.pl?ident_user=$::collaborateur[3]&action=facture&annee=$annee_active&mois=$mois_actif&client_id=$_->[1]&ra_id=$_->[2]&ident_id=$::id"}, $main::cgi->img({-src =>"$main::rep/images/euro-16.png", -alt => "Facturer-$_->[0]", -title => 'Facturer'})),
+              $main::cgi->end_div();
+      }
+      else {
+        print $main::cgi->start_div({-class => 'ra_ligne3col2'}), $main::cgi->a({-target =>'Edition', -href => "$::rep_pl/rapports_activites/ra/show.pl?ident_user=$main::collaborateur[3]&action=edition&annee=$annee_active&mois=$mois_actif&nb_jours=$nb_jours&mois_num=$mois_actif_num&client_id=$_->[1]&ra_id=$_->[2]&ident_id=$main::id"}, $main::cgi->img({-src =>"$main::rep/images/page_edit.png", -alt => "Editer-$_->[0]", -title => 'Editer'})),
+              "&nbsp", $main::cgi->a({-target =>'Suppression', -title => 'Supprimer', -href => "$::rep_pl/rapports_activites/ra/delete.pl?ident_user=$::collaborateur[3]&action=suppression&annee=$annee_active&mois=$mois_actif&client_id=$_->[1]&ra_id=$_->[2]&ident_id=$::id"}, $main::cgi->img({-src =>"$main::rep/images/page_delete.png", -alt => "Supprimer-$_->[0]", -title => 'Supprimer'})),
+              $main::cgi->end_div();      
+      }
+      print $main::cgi->div({-class => 'ra_ligne3col3'},'A valider');
+
+    }  
     elsif(($_->[2] == 0) && (($_->[3] == 0) || ($_->[3] == 2))) {
       #print "decodeMoisActif = $decodeMoisActif"; 
       print $main::cgi->div({-class => 'ra_ligne3col1'}, $main::cgi->a({-target => 'Creation', -title => 'Créer', -href => "$::rep_pl/rapports_activites/ra/show.pl?ident_user=$main::collaborateur[3]&action=creation&annee=$annee_active&mois=$mois_actif&client_id=$_->[1]&ident_id=$main::id"},"$_->[0]"));

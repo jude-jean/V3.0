@@ -2,7 +2,7 @@
 self.onerror = ma_gestion_erreur;
 
 var jours = [['Dimanche', 'Dim', 0], ['Lundi', 'Lun', 1], ['Mardi', 'Mar', 2], ['Mercredi', 'Mer', 3], ['Jeudi', 'Jeu', 4], ['Vendredi', 'Ven', 5], ['Samedi', 'Sam', 6]];
-var mois = [['Janvier', 'Janv', 0], ['F√©vrier', 'F√©v', 1] ,['Mars', 'Mars', 2], ['Avril', 'Avr', 3], ['Mai', 'Mai', 4], ['Juin', 'Juin', 5], ['Juillet', 'Juil', 6], ['Ao√ªt', 'Ao√ªt', 7], ['Septembre', 'Sep', 8], ['Octobre', 'Oct', 9], ['Novembre', 'Nov', 10], ['D√©cembre', 'D√©c', 11]];
+var mois = [['Janvier', 'Janv', 0], ['FÈvrier', 'FÈv', 1] ,['Mars', 'Mars', 2], ['Avril', 'Avr', 3], ['Mai', 'Mai', 4], ['Juin', 'Juin', 5], ['Juillet', 'Juil', 6], ['Ao˚t', 'Ao˚t', 7], ['Septembre', 'Sep', 8], ['Octobre', 'Oct', 9], ['Novembre', 'Nov', 10], ['DÈcembre', 'DÈc', 11]];
 var posRdvsY;
 
 function ecrire_dans_console (texte) {
@@ -18,7 +18,7 @@ function ecrire_dans_console (texte) {
 
 
 function ma_gestion_erreur(msg, url, line) {
-  ecrire_dans_console(' Une erreur est survenue dans le code Javscript, voici les d√©tails :\n Message d\'erreur : '+msg+'\n Ligne N¬∞ : '+line);
+  ecrire_dans_console(' Une erreur est survenue dans le code Javscript, voici les dÈtails :\n Message d\'erreur : '+msg+'\n Ligne N∞ : '+line);
   return true;
 }
 
@@ -50,11 +50,11 @@ function select_login() {
 var args, pas, aujourdhui_debut, aujourdhui_fin, oldeventY;
 
 function anime_rdv(rdv, event) {
-// Permet le d√©placement des rdvs dans le calendrier.
-// R√©cup√®re les coordonn√©es du rdv
+// Permet le dÈplacement des rdvs dans le calendrier.
+// RÈcupËre les coordonnÈes du rdv
 	var x = parseInt(rdv.style.left);
 	var y = parseInt(rdv.style.top);
-// Calcule la distance entre le rdv et le point ou l'√©v√©nement a eu lieu
+// Calcule la distance entre le rdv et le point ou l'ÈvÈnement a eu lieu
 	var deltaX = event.clientX - x;
 	var deltaY = event.clientY - y;
 	var nb_rdv = document.forms[1].elements['nb_rdv'].value;
@@ -62,10 +62,10 @@ function anime_rdv(rdv, event) {
 	oldeventY = event.clientY;
 // On supprime le gestionnaire de movement de la souris
 //	document.removeEventListener("mousemove", moveCursor, true);
-// On enregistre les gestionnaires d'√©v√©nenments
+// On enregistre les gestionnaires d'ÈvÈnenments
 	document.addEventListener("mousemove", moveHandler, true);
 	document.addEventListener("mouseup", upHandler, true);
-// !l'ÔøΩvÔøΩnement est traitÔøΩ, on bloque sa propagation
+// !l'ùvùnement est traitù, on bloque sa propagation
 	event.stopPropagation();
 	event.preventDefault();
 // Calcul du pas
@@ -79,7 +79,7 @@ function anime_rdv(rdv, event) {
 			break;
 		}
 	}
-// RÔøΩcupÔøΩration de l'ident du rdv
+// Rùcupùration de l'ident du rdv
     var id_rdv = rdv.getAttribute('id');
 //	var init_height = parseInt(document.forms[1].elements['haut_'+id_rdv].value, 10)*h_pas;	
 	var init_height = parseInt(rdv.style.height);
@@ -90,7 +90,7 @@ function anime_rdv(rdv, event) {
 	moveHandler(event);
 
 	function moveHandler(event) {
-// D√©placement l'√©l√©ment de la position courante de la souris, ajust√©e par le delta
+// DÈplacement l'ÈlÈment de la position courante de la souris, ajustÈe par le delta
 		var rdvY = event.clientY -deltaY;
 		var limite_haute = document.getElementById('titre_rdv_jour').offsetHeight - parseInt(rdv.style.height);
 		var limite_basse = document.getElementById('cal_visu').offsetHeight;
@@ -112,7 +112,7 @@ function anime_rdv(rdv, event) {
 	}
 
 	function upHandler(event) {
-// D√©senregistre les gestionnaires d'√©v√©nements
+// DÈsenregistre les gestionnaires d'ÈvÈnements
 		document.removeEventListener("mouseup", upHandler, true);
 		document.removeEventListener("mousemove", moveHandler, true);
 // On remet la bordure initiale
@@ -124,7 +124,7 @@ function anime_rdv(rdv, event) {
 			event.stopPropagation();
 //			var id_rdv = rdv.getAttribute('id');
 			if(document.forms[1].elements['ref_'+id_rdv]) {		
-				var msg = "Le rendez-vous a une p√©riodicit√©.\n\nSi vous souhaitez modifier le rendez-vous, cliquez sur OK\n\nSinon cliquez sur Annuler";
+				var msg = "Le rendez-vous a une pÈriodicitÈ.\n\nSi vous souhaitez modifier le rendez-vous, cliquez sur OK\n\nSinon cliquez sur Annuler";
 				if(!confirm(msg)) {
 					rdv.style.top = y + "px";
 					return;
@@ -153,7 +153,7 @@ function anime_rdv(rdv, event) {
 			pos = Math.round(-0.5 + (rdvY  / h_pas));
 			ecrire_dans_console("pos ="+pos+", rdvY = "+rdvY+", h_pas = "+h_pas+", rdvY/h_pas = "+(rdvY/h_pas)+", titre_rdv_jour.offsetHeight = "+document.getElementById('titre_rdv_jour').offsetHeight);
 			
-// on calcule l'url √† ex√©cuter
+// on calcule l'url ‡ exÈcuter
 			var enfants = rdv.childNodes;
 			var heure_debut, heure_fin, hh, mm, jj;
 			var hauteur_rdv = parseInt(document.forms[1].elements['haut_'+id_rdv].value, 10);
@@ -189,11 +189,11 @@ function anime_rdv(rdv, event) {
 						heure_fin = rdv_fin.getHours() <= 9 ? "0"+rdv_fin.getHours() : rdv_fin.getHours();
 					}
 					enfants[i].innerHTML = enfants[i].innerHTML.replace(/(\d+):(\d+) - (\d+):(\d+)/, heure_debut+":$2 - "+heure_fin+":$4");
-// Il faut maintenant modifier les champs cach√©s debut et fin qui seront utilis√©s pour constituer la chaine update_rdv
+// Il faut maintenant modifier les champs cachÈs debut et fin qui seront utilisÈs pour constituer la chaine update_rdv
 					document.forms[1].elements['debut_'+id_rdv].value = document.forms[1].elements['debut_'+id_rdv].value.replace(/(\d+):(\d+)/, heure_debut+":$2");
 					document.forms[1].elements['fin_'+id_rdv].value = document.forms[1].elements['fin_'+id_rdv].value.replace(/(\d+):(\d+)/, heure_fin+":$2");
 					var num_rdv = document.forms[1].elements['id_'+id_rdv].value;
-// Dans l'avenir, il faudra tenir compte peut-ÔøΩtre du type d'affichage en particulier des minutes. Aujourd'hui, ce n'est pas le cas				
+// Dans l'avenir, il faudra tenir compte peut-ùtre du type d'affichage en particulier des minutes. Aujourd'hui, ce n'est pas le cas				
 					var update_rdv = base+"/rendez_vous/update.pl?ident_id="+document.forms[1].elements['ident_id'].value+"&rdv="+num_rdv+"&debut="+document.forms[1].elements['debut_'+id_rdv].value+"&fin="+document.forms[1].elements['fin_'+id_rdv].value+"&annee="+document.forms[1].elements['annee'].value+"&mois="+document.forms[1].elements['mois'].value+"&jour="+document.forms[1].elements['jour'].value;
 //				ecrire_dans_console("update_rdv = "+update_rdv);
 //				location.href = update_rdv;
@@ -224,17 +224,17 @@ function curseur_rdv(rdv, event) {
 	var top_rdv = pos_rdv*h_pas + document.getElementById('titre_rdv_jour').offsetHeight;
 	var hauteur_rdv = parseInt(document.forms[1].elements['haut_'+id_rdv].value, 10)*h_pas;
 	
-// Permet le dÔøΩplacement des rdvs dans le calendrier.
-// RÔøΩcupÔøΩre les coordonnÔøΩes du rdv
+// Permet le dùplacement des rdvs dans le calendrier.
+// Rùcupùre les coordonnùes du rdv
 	var x = parseInt(rdv.style.left);
 	var y = parseInt(rdv.style.top);
-// Calcule la distance entre le rdv et le point ou l'ÔøΩvÔøΩnement a eu lieu
+// Calcule la distance entre le rdv et le point ou l'ùvùnement a eu lieu
 	var deltaX = event.clientX - x;
 	var deltaY = event.clientY - y;
-// On enregistre les gestionnaires d'ÔøΩvÔøΩnenments
+// On enregistre les gestionnaires d'ùvùnenments
 	document.addEventListener("mousemove", moveCursor, true);
 	document.addEventListener("mouseout", outCursor, true);
-// !l'ÔøΩvÔøΩnement est traitÔøΩ, on bloque sa propagation
+// !l'ùvùnement est traitù, on bloque sa propagation
 	event.stopPropagation();
 	event.preventDefault();
 //	ecrire_dans_console("delta Y = "+deltaY+", hauteur du rdv = "+hauteur_rdv);
@@ -248,7 +248,7 @@ function curseur_rdv(rdv, event) {
 	}
 
 	function outCursor(event) {
-// DÔøΩsenregistre les gestionnaires d'ÔøΩvÔøΩnements
+// Dùsenregistre les gestionnaires d'ùvùnements
 		document.removeEventListener("mousemove", moveCursor, true);
 		document.removeEventListener("mousout", outCursor, true);
 		event.stopPropagation();
@@ -305,12 +305,12 @@ function cree_ligne() {
 
 	var x = parseInt(rdv.style.left);
 	var y = parseInt(rdv.style.top);
-// Calcule la distance entre le rdv et le point ou l'ÔøΩvÔøΩnement a eu lieu
+// Calcule la distance entre le rdv et le point ou l'ùvùnement a eu lieu
 	var deltaX = event.clientX - x;
 	var deltaY = event.clientY - y;
 
 	
-	ecrire_dans_console ("event.clientY = "+event.clientY+", top rdv = "+(parseInt(rdv.style.top))+", top rdv calculÔøΩ = "+top_rdv+", hauteur rdv = "+hauteur_rdv);
+	ecrire_dans_console ("event.clientY = "+event.clientY+", top rdv = "+(parseInt(rdv.style.top))+", top rdv calculù = "+top_rdv+", hauteur rdv = "+hauteur_rdv);
 	if((event.clientY >= (parseInt(rdv.style.top) + hauteur_rdv - 2)) || (event.clientY <= (parseInt(rdv.style.top) + 2))) {
 		rdv.style.cursor = 's-resize';
 	}
@@ -331,10 +331,10 @@ function appel_url(bouton) {
   args = recup_args();
 
 //  AfficheNomsProprietes(document.forms[1].elements['ident_id']);
-//  ecrire_dans_console("Le nom du bouton ayant ÔøΩtÔøΩ validÔøΩ est : "+bouton.value+"\nLa valeur des arguments sont :\n-.Etat = "+args.etat+"\nIdent = "+args.ident);
+//  ecrire_dans_console("Le nom du bouton ayant ùtù validù est : "+bouton.value+"\nLa valeur des arguments sont :\n-.Etat = "+args.etat+"\nIdent = "+args.ident);
   switch (bouton.value) {
     case 'Calendrier' :
-//      ecrire_dans_console("L'utilisateur a appuyÔøΩ sur le bouton <Calendrier>");
+//      ecrire_dans_console("L'utilisateur a appuyù sur le bouton <Calendrier>");
       req = location.search;
       if(document.forms[1].elements['ident_id'].value != args['ident_id']) {
         req = req.replace(/ident_id=.*/, 'ident_id='+document.forms[1].elements['ident_id'].value);
@@ -359,9 +359,9 @@ function appel_url(bouton) {
 
       break;
       
-    case "Rapports d'activit√©s" :
+    case "Rapports d'activitÈs" :
     case "Rapports d'activites" :
-//      ecrire_dans_console("L'utilisateur a appuyÔøΩ sur le bouton <Rapports d'activitÔøΩs>");
+//      ecrire_dans_console("L'utilisateur a appuyù sur le bouton <Rapports d'activitùs>");
       req = location.search;
       if(document.forms[1].elements['ident_id'].value != args['ident_id']) {
         req = req.replace(/ident_id=.*/, 'ident_id='+document.forms[1].elements['ident_id'].value);
@@ -385,7 +385,7 @@ function appel_url(bouton) {
       break;
 
     case 'Compte' :
-//      ecrire_dans_console("L'utilisateur a appuyÔøΩ sur le bouton <Compte> et mois ÔøΩ pour valeur ");
+//      ecrire_dans_console("L'utilisateur a appuyù sur le bouton <Compte> et mois ù pour valeur ");
       req = location.search;
       if(document.forms[1].elements['ident_id'].value != args['ident_id']) {
         req = req.replace(/ident_id=.*/, 'ident_id='+document.forms[1].elements['ident_id'].value);
@@ -406,8 +406,8 @@ function appel_url(bouton) {
 //      ecrire_dans_console("La nouvelle valeur de l'url est :"+location);
       break;
 
-    case "Donn√©es sociales" :
-//      ecrire_dans_console("L'utilisateur a appuyÔøΩ sur le bouton <DonnÔøΩes sociales>");
+    case "DonnÈes sociales" :
+//      ecrire_dans_console("L'utilisateur a appuyù sur le bouton <Donnùes sociales>");
       req = location.search;
       if(document.forms[1].elements['ident_id'].value != args['ident_id']) {
         req = req.replace(/ident_id=.*/, 'ident_id='+document.forms[1].elements['ident_id'].value);
@@ -457,17 +457,17 @@ function gestion_affichage_rdv() {
     args.annee = document.forms[1].elements['annee'].value;
   }
   if(args.mois == null) {
-//    ecrire_dans_console("Le paramÔøΩtre mois dans la ligne de commande est nul");
+//    ecrire_dans_console("Le paramùtre mois dans la ligne de commande est nul");
     args.mois = document.forms[1].elements['mois'].value;
   }
 /*  else {
-    ecrire_dans_console("Le paramÔøΩtre mois dans la ligne de commande est ÔøΩgale ÔøΩ :"+args.mois);
+    ecrire_dans_console("Le paramùtre mois dans la ligne de commande est ùgale ù :"+args.mois);
   }*/
   if(args.jour == null) {
     args.jour = document.forms[1].elements['jour'].value;
   }
   nb_rdv = document.forms[1].elements['nb_rdv'].value;
-//  ecrire_dans_console('La valeur du champs annÔøΩe est :'+args.annee+' la valeur du champs mois est :'+args.mois+'\nLa valeur du champs jour est :'+args.jour);
+//  ecrire_dans_console('La valeur du champs annùe est :'+args.annee+' la valeur du champs mois est :'+args.mois+'\nLa valeur du champs jour est :'+args.jour);
 
   aujourdhui_debut = new Date(args.annee, parseInt(args.mois, 10) - 1, args.jour);
   aujourdhui_fin = new Date(args.annee, parseInt(args.mois, 10) - 1, args.jour, 23, 59, 59);
@@ -502,13 +502,13 @@ function gestion_affichage_rdv() {
           decalage = parseFloat(document.forms[1].elements['droite_'+id_rdv].value);
           taille = parseFloat(document.forms[1].elements['taille_'+id_rdv].value);
 //          list_rdv_apres = document.forms[1].elements['apres_'+id_rdv].value.split(/\s+/);
-//          ecrire_dans_console('Liste des rdv aprÔøΩs = '+list_rdv_apres);
+//          ecrire_dans_console('Liste des rdv aprùs = '+list_rdv_apres);
           largeur = largeur_totale*taille;
           rdv.style.left =  ajust_gauche + (decalage*largeur_totale)+'px';
-//          ecrire_dans_console('La largeur de l\'ÔøΩlÔøΩment '+rdv.id+' est : '+largeur+'px, son dÔøΩcalage est de : '+decalage+'.\nSon parent a pour la largeur :'+parent_rdv.offsetWidth);
+//          ecrire_dans_console('La largeur de l\'ùlùment '+rdv.id+' est : '+largeur+'px, son dùcalage est de : '+decalage+'.\nSon parent a pour la largeur :'+parent_rdv.offsetWidth);
           rdv.style.width = largeur-4+'px';
 // -parseInt(document.forms[1].elements['haut_'+id_rdv].value, 10) + 1 car il faut tenir compte des bordures
-// Pour assurer une parfaite portabilitÔøΩ, il faudrait faire un test pour sur le type du browser
+// Pour assurer une parfaite portabilitù, il faudrait faire un test pour sur le type du browser
 //		  ecrire_dans_console("haut = "+parseInt(document.forms[1].elements['haut_'+id_rdv].value, 10));
 //          rdv.style.top = 1 + decalage_rdv_heure_col2 + h_pas*parseInt(document.forms[1].elements['pos_'+id_rdv].value, 10) + document.getElementById('titre_rdv_jour').offsetHeight+'px';
           rdv.style.top = -4 + h_pas*parseInt(document.forms[1].elements['pos_'+id_rdv].value, 10) + document.getElementById('titre_rdv_jour').offsetHeight+'px';
@@ -547,7 +547,7 @@ function valide_form_connexion(form) {
 
 function valide_login(elt) {
 /*  if(elt.value.search(/^[a-z][a-z0-9]{3,}/) == -1) {
-    ecrire_dans_console('Le login est incorrect. Il doit avoir au moins 4 caractÔøΩres.\nIl doit commencer obligatoirement par une lettre minuscule \net n\'avoir aucune majuscule');
+    ecrire_dans_console('Le login est incorrect. Il doit avoir au moins 4 caractùres.\nIl doit commencer obligatoirement par une lettre minuscule \net n\'avoir aucune majuscule');
     elt.focus();
     return false;
   }*/
@@ -556,7 +556,7 @@ function valide_login(elt) {
      (elt.value.search(/^[0-9\.]/) == 0) ||
      (elt.value.search(/^[\d\s]*$/) == 0) ||
      (elt.value.search(/[\$\^\/\\=\+\#\{\}\"\(\)\[\]\|\`\!\?\,\;\:]/) >= 0)) {
-        ecrire_dans_console('Le login ne peut :\n -√™tre vide ou avoir une taille inf√©rieure √† 3\n -avoir une taille sup√©rieure √† 20\n -commencer par un chiffre ou par un point\n -√™tre une combinaison de blancs et de chiffres\n -comprendre des caract√®res tels que :\n   $, ^, \\, /, +, =, \(, \), [, ], {, }, \", #, |,\`, !,?, ,, ;, : etc. ');
+        ecrire_dans_console('Le login ne peut :\n -Ítre vide ou avoir une taille infÈrieure ‡ 3\n -avoir une taille supÈrieure ‡ 20\n -commencer par un chiffre ou par un point\n -Ítre une combinaison de blancs et de chiffres\n -comprendre des caractËres tels que :\n   $, ^, \\, /, +, =, \(, \), [, ], {, }, \", #, |,\`, !,?, ,, ;, : etc. ');
         elt.focus();
         return false;
   }
@@ -567,32 +567,32 @@ function valide_login(elt) {
 
 function valide_modif_compte(bouton) {
   var smenu = bouton.form.elements['smenu'].value;
-//  ecrire_dans_console('Sous menu : '+smenu+' le bouton enfoncÔøΩ est : '+bouton.name+' et sa valeur est '+bouton.value+' sa forme contient '+bouton.form.length+' ÔøΩlÔøΩments');
+//  ecrire_dans_console('Sous menu : '+smenu+' le bouton enfoncù est : '+bouton.name+' et sa valeur est '+bouton.value+' sa forme contient '+bouton.form.length+' ùlùments');
   try {
 /*    var msg = '';
     for(var i = 0; i < bouton.form.length; i++) {
-       msg += ' ElÔøΩment nÔøΩ '+i+' : '+bouton.form.elements[i].name+ ' sa valeur : '+bouton.form.elements[i].value+'\n';
+       msg += ' Elùment nù '+i+' : '+bouton.form.elements[i].name+ ' sa valeur : '+bouton.form.elements[i].value+'\n';
     }
-    ecrire_dans_console('La liste des ÔøΩlÔøΩments du formulaire\n'+msg);
+    ecrire_dans_console('La liste des ùlùments du formulaire\n'+msg);
 */
     if(smenu == 'identification') {
       if(bouton.value == 'OK') {
         if((bouton.form.elements['nom'].value != bouton.form.elements['nom_old'].value) ||
            (bouton.form.elements['prenom'].value != bouton.form.elements['prenom_old'].value) ||
            (bouton.form.elements['login'].value != bouton.form.elements['login_old'].value)) {
-          ecrire_dans_console('Vous avez modifi√© certains champs dans le formulaire, vous ne pouvez utiliser le bouton OK :\n 1) -Soit vous d√©sirez sauvegarder vos modifications et quitter le menu, cliquer successivement sur les boutons Appliquer et OK\n 2) -Soit vous souhaitez quitter le menu sans sauvegarder vos modifications, cliquer successivement sur les boutons R√©tablir puis OK');
+          ecrire_dans_console('Vous avez modifiÈ certains champs dans le formulaire, vous ne pouvez utiliser le bouton OK :\n 1) -Soit vous dÈsirez sauvegarder vos modifications et quitter le menu, cliquer successivement sur les boutons Appliquer et OK\n 2) -Soit vous souhaitez quitter le menu sans sauvegarder vos modifications, cliquer successivement sur les boutons RÈtablir puis OK');
           return false;
         }
         return true;
       }
-      else if(bouton.value == 'Appliquer') { // R√©alisation des tests
+      else if(bouton.value == 'Appliquer') { // RÈalisation des tests
         if(bouton.form.elements['nom'].value != bouton.form.elements['nom_old'].value) {
           if((bouton.form.elements['nom'].value.length == 0) ||
              (bouton.form.elements['nom'].value.length > 20) ||
              (bouton.form.elements['nom'].value.search(/^[0-9\.\s]/) == 0) ||
              (bouton.form.elements['nom'].value.search(/^[\d\s]*$/) == 0) ||
              (bouton.form.elements['nom'].value.search(/[\$\^\/\\=\+\#\{\}\"\(\)\[\]\|\`\!\?\,\;\:]/) >= 0)) {
-                ecrire_dans_console('Le nom ne peut :\n -√™tre vide\n -avoir une taille sup√©rieure √† 20\n -commencer par un chiffre, un espace ou par un point\n -√™tre une combinaison de blancs et de chiffres\n -comprendre des caract√®res tels que :\n   $, ^, \\, /, +, =, \(, \), [, ], {, }, \", #, |,\`, !,?, ,, ;, : etc. ');
+                ecrire_dans_console('Le nom ne peut :\n -Ítre vide\n -avoir une taille supÈrieure ‡ 20\n -commencer par un chiffre, un espace ou par un point\n -Ítre une combinaison de blancs et de chiffres\n -comprendre des caractËres tels que :\n   $, ^, \\, /, +, =, \(, \), [, ], {, }, \", #, |,\`, !,?, ,, ;, : etc. ');
                 bouton.form.elements['nom'].focus();
                 return false;
           }
@@ -603,7 +603,7 @@ function valide_modif_compte(bouton) {
              (bouton.form.elements['prenom'].value.search(/^[0-9\.\s]/) == 0) ||
              (bouton.form.elements['prenom'].value.search(/^[\d\s]*$/) == 0) ||
              (bouton.form.elements['prenom'].value.search(/[\$\^\/\\=\+\#\{\}\"\(\)\[\]\|\`\!\?\,\;\:]/) >= 0)) {
-                ecrire_dans_console('Le pr√©nom ne peut :\n -√™tre vide\n -avoir une taille sup√©rieure √† 20\n -commencer par un chiffre, un espace ou par un point\n -√™tre une combinaison de blancs et de chiffres\n -comprendre des caract√®res tels que :\n   $, ^, \\, /, +, =, \(, \), [, ], {, }, \", #, |,\`, !,?, ,, ;, : etc. ');
+                ecrire_dans_console('Le prÈnom ne peut :\n -Ítre vide\n -avoir une taille supÈrieure ‡ 20\n -commencer par un chiffre, un espace ou par un point\n -Ítre une combinaison de blancs et de chiffres\n -comprendre des caractËres tels que :\n   $, ^, \\, /, +, =, \(, \), [, ], {, }, \", #, |,\`, !,?, ,, ;, : etc. ');
                 bouton.form.elements['prenom'].focus();
                 return false;
           }
@@ -614,7 +614,7 @@ function valide_modif_compte(bouton) {
              (bouton.form.elements['login'].value.search(/^[0-9\.\s]/) == 0) ||
              (bouton.form.elements['login'].value.search(/^[\d\s]*$/) == 0) ||
              (bouton.form.elements['login'].value.search(/[\$\^\/\\=\+\#\{\}\"\(\)\[\]\|\`\!\?\,\;\:]/) >= 0)) {
-                ecrire_dans_console('Le login ne peut :\n -√™tre vide ou avoir une taille inf√©rieure √† 4\n -avoir une taille sup√©rieure √† 20\n -commencer par un chiffre, un espace ou par un point\n -√™tre une combinaison de blancs et de chiffres\n -comprendre des caract√®res tels que :\n   $, ^, \\, /, +, =, \(, \), [, ], {, }, \", #, |,\`, !,?, ,, ;, : etc. ');
+                ecrire_dans_console('Le login ne peut :\n -Ítre vide ou avoir une taille infÈrieure ‡ 4\n -avoir une taille supÈrieure ‡ 20\n -commencer par un chiffre, un espace ou par un point\n -Ítre une combinaison de blancs et de chiffres\n -comprendre des caractËres tels que :\n   $, ^, \\, /, +, =, \(, \), [, ], {, }, \", #, |,\`, !,?, ,, ;, : etc. ');
                 bouton.form.elements['login'].focus();
                 return false;
           }
@@ -627,7 +627,7 @@ function valide_modif_compte(bouton) {
         if((bouton.form.elements['mail_mission'].value != bouton.form.elements['mail_mission_old'].value) ||
            (bouton.form.elements['tel_mission'].value != bouton.form.elements['tel_mission_old'].value) ||
            (bouton.form.elements['tel_perso'].value != bouton.form.elements['tel_perso_old'].value)) {
-          ecrire_dans_console('Vous avez modifi√© certains champs dans le formulaire, vous ne pouvez utiliser le bouton OK :\n 1) -Soit vous d√©sirez sauvegarder vos modifications et quitter le menu, cliquer successivement sur les boutons Appliquer et OK\n 2) -Soit vous souhaitez quitter le menu sans sauvegarder vos modifications, cliquer successivement sur les boutons R√©tablir puis OK');
+          ecrire_dans_console('Vous avez modifiÈ certains champs dans le formulaire, vous ne pouvez utiliser le bouton OK :\n 1) -Soit vous dÈsirez sauvegarder vos modifications et quitter le menu, cliquer successivement sur les boutons Appliquer et OK\n 2) -Soit vous souhaitez quitter le menu sans sauvegarder vos modifications, cliquer successivement sur les boutons RÈtablir puis OK');
           return false;
         }
         return true;
@@ -639,7 +639,7 @@ function valide_modif_compte(bouton) {
              (bouton.form.elements['mail_mission'].value.length > 0) &&
              (bouton.form.elements['mail_mission'].value.length < 101))) {
                 bouton.form.elements['mail_mission'].focus();
-                ecrire_dans_console('L\'adresse mail est incorrecte.\n\nElle doit √™tre de la forme nom@domaine.ext avec\n -nom : mot.mot.---.mot,\n -domaine : mot.mot.---.mot,\n -ext : mot');
+                ecrire_dans_console('L\'adresse mail est incorrecte.\n\nElle doit Ítre de la forme nom@domaine.ext avec\n -nom : mot.mot.---.mot,\n -domaine : mot.mot.---.mot,\n -ext : mot');
                 return false;
           }
         }
@@ -648,7 +648,7 @@ function valide_modif_compte(bouton) {
            (bouton.form.elements['tel_mission'].value.length < 11) &&
                (bouton.form.elements['tel_mission'].value.search(/^\d{10}$/)== 0))) {
                   bouton.form.elements['tel_mission'].focus();
-                  ecrire_dans_console('Le champ T√©l mission est incorrect.\nIl doit obligatoirement comporter un nombre de 10 chiffres');
+                  ecrire_dans_console('Le champ TÈl mission est incorrect.\nIl doit obligatoirement comporter un nombre de 10 chiffres');
                   return false;
           }
         }
@@ -657,7 +657,7 @@ function valide_modif_compte(bouton) {
                (bouton.form.elements['tel_perso'].value.length < 11) &&
                (bouton.form.elements['tel_perso'].value.search(/^\d{10}$/) == 0))) {
                   bouton.form.elements['tel_perso'].focus();
-                  ecrire_dans_console('Le champ T√©l perso est incorrect.\nIl doit obligatoirement comporter un nombre de 10 chiffres');
+                  ecrire_dans_console('Le champ TÈl perso est incorrect.\nIl doit obligatoirement comporter un nombre de 10 chiffres');
                   return false;
           }
         }
@@ -669,7 +669,7 @@ function valide_modif_compte(bouton) {
             if((bouton.form.elements['pswd_actuel'].value.length > 0) ||
                (bouton.form.elements['pswd_new1'].value.length > 0) ||
                (bouton.form.elements['pswd_new2'].value.length > 0)) {
-                  ecrire_dans_console('Vous avez modifi√© certains champs dans le formulaire, vous ne pouvez utiliser le bouton OK :\n 1) -Soit vous d√©sirez sauvegarder vos modifications et quitter le menu, cliquer successivement sur les boutons Appliquer et OK\n 2) -Soit vous souhaitez quitter le menu sans sauvegarder vos modifications, cliquer successivement sur les boutons R√©tablir puis OK');
+                  ecrire_dans_console('Vous avez modifiÈ certains champs dans le formulaire, vous ne pouvez utiliser le bouton OK :\n 1) -Soit vous dÈsirez sauvegarder vos modifications et quitter le menu, cliquer successivement sur les boutons Appliquer et OK\n 2) -Soit vous souhaitez quitter le menu sans sauvegarder vos modifications, cliquer successivement sur les boutons RÈtablir puis OK');
                   return false;
              }
              return true;
@@ -678,7 +678,7 @@ function valide_modif_compte(bouton) {
             if((bouton.form.elements['pswd_new1'].value != bouton.form.elements['pswd_new2'].value) ||
                (bouton.form.elements['pswd_new1'].value.length <= 3) ||
                (bouton.form.elements['pswd_new1'].value.length <= 3)) {
-                 ecrire_dans_console('Erreur avec le nouveau mot de passe : \n -Soit le deuxi√®me mot de passe saisi ne correspond pas au premier\n -Soit sa taile est inf√©rieure 4');
+                 ecrire_dans_console('Erreur avec le nouveau mot de passe : \n -Soit le deuxiËme mot de passe saisi ne correspond pas au premier\n -Soit sa taile est infÈrieure 4');
                  return false;
                }
             return true;
@@ -693,7 +693,7 @@ function valide_modif_compte(bouton) {
   }
   return true;
 }
-/**** Fonctions utilis√©es par ra.pl *****************/
+/**** Fonctions utilisÈes par ra.pl *****************/
 var vcourante = ' ';
 var valeur_pred;
 var msg = '';
@@ -716,7 +716,7 @@ if(!window.Node) {
 function calcul_nb_presence(elt) {
   var valeur = elt.value;
   var v, locale, ret1, ret2;
-//  ecrire_dans_console('D√©but de calcul_nb_presence()\n La valeur de vcourante est : '+vcourante+'\n La valeur de valeur_pred est : '+valeur_pred);
+//  ecrire_dans_console('DÈbut de calcul_nb_presence()\n La valeur de vcourante est : '+vcourante+'\n La valeur de valeur_pred est : '+valeur_pred);
   valeur_pred = vcourante;
   vcourante = valeur;
 //  msg += '\ncalcul_nb_presence() : valeur = '+valeur+ ' vcourante = '+vcourante+' valeur_pred = '+valeur_pred;
@@ -725,84 +725,84 @@ function calcul_nb_presence(elt) {
     switch(valeur) {
       case ' ':
       case '0' :
-        // ecrire_dans_console('Le compteur a modifi√© est nb_dispo. Sa valeur est'+elt.form.elements['nb_dispo'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_dispo. Sa valeur est'+elt.form.elements['nb_dispo'].value);
         v = Number(elt.form.elements['nb_dispo'].value);
         v += 0.5;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        elt.form.elements['nb_dispo'].value = v;// √† cause de l'arrondi
+        elt.form.elements['nb_dispo'].value = v;// ‡ cause de l'arrondi
         break;
      case '1' :
      case '2' :
-        // ecrire_dans_console('Le compteur a modifi√© est nb_presence. Sa valeur est'+elt.form.elements['nb_presence'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_presence. Sa valeur est'+elt.form.elements['nb_presence'].value);
         v = Number(elt.form.elements['nb_presence'].value);
         v += 0.5;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        elt.form.elements['nb_presence'].value = v;// √† cause de l'arrondi
+        elt.form.elements['nb_presence'].value = v;// ‡ cause de l'arrondi
        break;
      case '3':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_cp. Sa valeur est'+elt.form.elements['nb_cp'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_cp. Sa valeur est'+elt.form.elements['nb_cp'].value);
         v = Number(elt.form.elements['nb_cp'].value);
         v += 0.5;
         // // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        elt.form.elements['nb_cp'].value = v;// √† cause de l'arrondi
+        elt.form.elements['nb_cp'].value = v;// ‡ cause de l'arrondi
         v = Number(elt.form.elements['nb_absence'].value);
         v+= 0.5;
         elt.form.elements['nb_absence'].value = v;
        break;
       case '4':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_rtt. Sa valeur est'+elt.form.elements['nb_rtt'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_rtt. Sa valeur est'+elt.form.elements['nb_rtt'].value);
         v = Number(elt.form.elements['nb_rtt'].value);
         v += 0.5;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        elt.form.elements['nb_rtt'].value = v;// √† cause de l'arrondi
+        elt.form.elements['nb_rtt'].value = v;// ‡ cause de l'arrondi
         v = Number(elt.form.elements['nb_absence'].value);
         v+= 0.5;
         elt.form.elements['nb_absence'].value = v;
        break;
      case '5':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_maladie. Sa valeur est'+elt.form.elements['nb_maladie'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_maladie. Sa valeur est'+elt.form.elements['nb_maladie'].value);
         v = Number(elt.form.elements['nb_maladie'].value);
         v += 0.5;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        elt.form.elements['nb_maladie'].value = v;// ÔøΩ cause de l'arrondi
+        elt.form.elements['nb_maladie'].value = v;// ù cause de l'arrondi
         v = Number(elt.form.elements['nb_absence'].value);
         v+= 0.5;
         elt.form.elements['nb_absence'].value = v;
        break;
      case '6':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_recup. Sa valeur est'+elt.form.elements['nb_recup'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_recup. Sa valeur est'+elt.form.elements['nb_recup'].value);
         v = Number(elt.form.elements['nb_recup'].value);
         v += 0.5;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        elt.form.elements['nb_recup'].value = v;// √† cause de l'arrondi
+        elt.form.elements['nb_recup'].value = v;// ‡ cause de l'arrondi
         v = Number(elt.form.elements['nb_absence'].value);
         v+= 0.5;
         elt.form.elements['nb_absence'].value = v;
        break;
      case '7':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_formation. Sa valeur est'+elt.form.elements['nb_formation'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_formation. Sa valeur est'+elt.form.elements['nb_formation'].value);
         v = Number(elt.form.elements['nb_formation'].value);
         v += 0.5;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        elt.form.elements['nb_formation'].value = v;// ÔøΩ cause de l'arrondi
+        elt.form.elements['nb_formation'].value = v;// ù cause de l'arrondi
         v = Number(elt.form.elements['nb_absence'].value);
         v+= 0.5;
         elt.form.elements['nb_absence'].value = v;
        break;
      case '8':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_excep. Sa valeur est'+elt.form.elements['nb_excep'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_excep. Sa valeur est'+elt.form.elements['nb_excep'].value);
         v = Number(elt.form.elements['nb_excep'].value);
         v += 0.5;
-        elt.form.elements['nb_excep'].value = v;// ÔøΩ cause de l'arrondi
+        elt.form.elements['nb_excep'].value = v;// ù cause de l'arrondi
         v = Number(elt.form.elements['nb_absence'].value);
         v+= 0.5;
         elt.form.elements['nb_absence'].value = v;
        break;
      case '9':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_sssolde. Sa valeur est'+elt.form.elements['nb_sssolde'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_sssolde. Sa valeur est'+elt.form.elements['nb_sssolde'].value);
         v = Number(elt.form.elements['nb_sssolde'].value);
         v += 0.5;
-        elt.form.elements['nb_sssolde'].value = v;// ÔøΩ cause de l'arrondi
+        elt.form.elements['nb_sssolde'].value = v;// ù cause de l'arrondi
         v = Number(elt.form.elements['nb_absence'].value);
         v+= 0.5;
         elt.form.elements['nb_absence'].value = v;
@@ -811,84 +811,84 @@ function calcul_nb_presence(elt) {
     switch(valeur_pred) {
       case ' ':
       case '0' :
-        // ecrire_dans_console('Le compteur a modifi√© est nb_dispo. Sa valeur est'+elt.form.elements['nb_dispo'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_dispo. Sa valeur est'+elt.form.elements['nb_dispo'].value);
         v = Number(elt.form.elements['nb_dispo'].value);
         v -= 0.5;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        elt.form.elements['nb_dispo'].value = v;// ÔøΩ cause de l'arrondi
+        elt.form.elements['nb_dispo'].value = v;// ù cause de l'arrondi
         break;
      case '1' :
      case '2' :
-        // ecrire_dans_console('Le compteur a modifi√© est nb_presence. Sa valeur est'+elt.form.elements['nb_presence'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_presence. Sa valeur est'+elt.form.elements['nb_presence'].value);
         v = Number(elt.form.elements['nb_presence'].value);
         v -= 0.5;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        elt.form.elements['nb_presence'].value = v;// ÔøΩ cause de l'arrondi
+        elt.form.elements['nb_presence'].value = v;// ù cause de l'arrondi
        break;
      case '3':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_cp. Sa valeur est'+elt.form.elements['nb_cp'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_cp. Sa valeur est'+elt.form.elements['nb_cp'].value);
         v = Number(elt.form.elements['nb_cp'].value);
         v -= 0.5;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        elt.form.elements['nb_cp'].value = v;// ÔøΩ cause de l'arrondi
+        elt.form.elements['nb_cp'].value = v;// ù cause de l'arrondi
         v = Number(elt.form.elements['nb_absence'].value);
         v -= 0.5;
         elt.form.elements['nb_absence'].value = v;
        break;
       case '4':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_rtt. Sa valeur est'+elt.form.elements['nb_rtt'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_rtt. Sa valeur est'+elt.form.elements['nb_rtt'].value);
         v = Number(elt.form.elements['nb_rtt'].value);
         v -= 0.5;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        elt.form.elements['nb_rtt'].value = v;// ÔøΩ cause de l'arrondi
+        elt.form.elements['nb_rtt'].value = v;// ù cause de l'arrondi
         v = Number(elt.form.elements['nb_absence'].value);
         v -= 0.5;
         elt.form.elements['nb_absence'].value = v;
        break;
      case '5':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_maladie. Sa valeur est'+elt.form.elements['nb_maladie'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_maladie. Sa valeur est'+elt.form.elements['nb_maladie'].value);
         v = Number(elt.form.elements['nb_maladie'].value);
         v -= 0.5;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        elt.form.elements['nb_maladie'].value = v;// ÔøΩ cause de l'arrondi
+        elt.form.elements['nb_maladie'].value = v;// ù cause de l'arrondi
         v = Number(elt.form.elements['nb_absence'].value);
         v -= 0.5;
         elt.form.elements['nb_absence'].value = v;
        break;
      case '6':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_recup. Sa valeur est'+elt.form.elements['nb_recup'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_recup. Sa valeur est'+elt.form.elements['nb_recup'].value);
         v = Number(elt.form.elements['nb_recup'].value);
         v -= 0.5;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        elt.form.elements['nb_recup'].value = v;// ÔøΩ cause de l'arrondi
+        elt.form.elements['nb_recup'].value = v;// ù cause de l'arrondi
         v = Number(elt.form.elements['nb_absence'].value);
         v -= 0.5;
         elt.form.elements['nb_absence'].value = v;
        break;
      case '7':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_formation. Sa valeur est'+elt.form.elements['nb_formation'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_formation. Sa valeur est'+elt.form.elements['nb_formation'].value);
         v = Number(elt.form.elements['nb_formation'].value);
         v -= 0.5;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        elt.form.elements['nb_formation'].value = v;// ÔøΩ cause de l'arrondi
+        elt.form.elements['nb_formation'].value = v;// ù cause de l'arrondi
         v = Number(elt.form.elements['nb_absence'].value);
         v -= 0.5;
         elt.form.elements['nb_absence'].value = v;
        break;
      case '8':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_excep. Sa valeur est'+elt.form.elements['nb_excep'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_excep. Sa valeur est'+elt.form.elements['nb_excep'].value);
         v = Number(elt.form.elements['nb_excep'].value);
         v -= 0.5;
-        elt.form.elements['nb_excep'].value = v;// ÔøΩ cause de l'arrondi
+        elt.form.elements['nb_excep'].value = v;// ù cause de l'arrondi
         v = Number(elt.form.elements['nb_absence'].value);
         v -= 0.5;
         elt.form.elements['nb_absence'].value = v;
        break;
      case '9':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_sssolde. Sa valeur est'+elt.form.elements['nb_sssolde'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_sssolde. Sa valeur est'+elt.form.elements['nb_sssolde'].value);
         v = Number(elt.form.elements['nb_sssolde'].value);
         v -= 0.5;
-        elt.form.elements['nb_sssolde'].value = v;// ÔøΩ cause de l'arrondi
+        elt.form.elements['nb_sssolde'].value = v;// ù cause de l'arrondi
         v = Number(elt.form.elements['nb_absence'].value);
         v -= 0.5;
         elt.form.elements['nb_absence'].value = v;
@@ -1011,7 +1011,7 @@ function hsup_autres_valeurs(elt) {
      v = v -Number(valeur_pred);
      elt.form.elements['nb_hsup100'].value = v;
   }
-//  ecrire_dans_console('Le tableau option a '+elt.options.length+' √©l√©ments.\Son dernier √©l√©ment a pour texte : '+elt.options[elt.options.length - 1].text+'\nLe tableau data_save a '+data_save.length+' √©l√©ments.\nValeur_pred est √©gale √† '+valeur_pred);
+//  ecrire_dans_console('Le tableau option a '+elt.options.length+' ÈlÈments.\Son dernier ÈlÈment a pour texte : '+elt.options[elt.options.length - 1].text+'\nLe tableau data_save a '+data_save.length+' ÈlÈments.\nValeur_pred est Ègale ‡ '+valeur_pred);
   if(data_save.length == 0) {
     data_save.push(elt, vcourante, valeur_pred);
     win = window.open(base+"/hsupplus.pl?elt="+data_save[0].name+"&mois="+args.mois+"&annee="+args.annee, "heures_sup", "resizable, status, width=400, height=200");
@@ -1019,7 +1019,7 @@ function hsup_autres_valeurs(elt) {
   }
   else {
     if(data_save[0].name != elt.name) {
-      ecrire_dans_console('Votre demande d\'ajout d\'une nouvelle option dans la liste des choix pour l\'√©l√©ment '+elt.name+' ne peut aboutir.\nIl y a d√©ja une demande du m√™me type en cours et non compl√©t√©e pour l\'√©l√©ment '+data_save[0].name+'\n\nVous devez terminer cette action avant d\'envisager d\'en ajouter pour l\'√©l√©ment '+elt.name+'.\nVous pouvez :\n-Soit choisir une option et cliquer sur le bouton \'OK\'.\n-Soit fermer la fen√™tre en cliquant sur le bouton \'Fermer\'.');
+      ecrire_dans_console('Votre demande d\'ajout d\'une nouvelle option dans la liste des choix pour l\'ÈlÈment '+elt.name+' ne peut aboutir.\nIl y a dÈja une demande du mÍme type en cours et non complÈtÈe pour l\'ÈlÈment '+data_save[0].name+'\n\nVous devez terminer cette action avant d\'envisager d\'en ajouter pour l\'ÈlÈment '+elt.name+'.\nVous pouvez :\n-Soit choisir une option et cliquer sur le bouton \'OK\'.\n-Soit fermer la fenÍtre en cliquant sur le bouton \'Fermer\'.');
       elt.value = valeur_pred;
 
       if(elt.name.search(/^hsup0_/)== 0){
@@ -1063,16 +1063,16 @@ function recup_args() {
       args[nom] = unescape(valeur);
     }
     catch(e) {
-      ecrire_dans_console('unescape(): Probl√®me de codage avec la valeur de '+nom+' √©gale √† '+valeur);
+      ecrire_dans_console('unescape(): ProblËme de codage avec la valeur de '+nom+' Ègale ‡ '+valeur);
       try {
         args[nom] = decodeURIComponent(valeur);
       }
       catch(e) {
         args[nom] = valeur;
-        ecrire_dans_console('decodeURIComponent(): Probl√®me de codage avec la valeur de '+nom+' √©gale √† '+args[nom]);
+        ecrire_dans_console('decodeURIComponent(): ProblËme de codage avec la valeur de '+nom+' Ègale ‡ '+args[nom]);
       }
       finally {
-        ecrire_dans_console('Le d√©codage pour la valeur de '+nom+ ' est √©gale √† '+args[nom]);
+        ecrire_dans_console('Le dÈcodage pour la valeur de '+nom+ ' est Ègale ‡ '+args[nom]);
       }
     }
   }
@@ -1089,11 +1089,11 @@ function vide_data_save() {
   for(var i = 0; i < lg; i++) {
     data_save.pop();
   }
-//  ecrire_dans_console('Taille de data_save aprÔøΩs la fonction : '+data_save.length);
+//  ecrire_dans_console('Taille de data_save aprùs la fonction : '+data_save.length);
 }
 
 
-function bascule_astreinte(bouton) { // ce sontdes cases ÔøΩ cocher
+function bascule_astreinte(bouton) { // ce sontdes cases ù cocher
   var tab_case = bouton.form.elements[bouton.name];
   var valeur;
   for(var i = 0; i < tab_case.length; i++) {
@@ -1120,12 +1120,12 @@ function bascule_astreinte(bouton) { // ce sontdes cases ÔøΩ cocher
 }
 
 function visualiser_ra() {
-  var rep = confirm(encode('Veillez √† enregistrer vos donn√©es nouvellement saisies car elles seront irr√©m√©diablement perdues.\n\tSouhaitez-vous continuer la visualisation du rapport d\'activit√©s ?'));
+  var rep = confirm(encode('Veillez ‡ enregistrer vos donnÈes nouvellement saisies car elles seront irrÈmÈdiablement perdues.\n\tSouhaitez-vous continuer la visualisation du rapport d\'activitÈs ?'));
   return rep;
 }
 
 function supprimer_ra() {
-  var rep = confirm('La suppression d\'un rapport d\'activit√©s entraine la perte de toutes les donn√©es saisies dans celui-ci.\n\tSouhaitez-vous supprimer ce rapport d\'activit√©s ?');
+  var rep = confirm('La suppression d\'un rapport d\'activitÈs entraine la perte de toutes les donnÈes saisies dans celui-ci.\n\tSouhaitez-vous supprimer ce rapport d\'activitÈs ?');
   return rep;
 }
 
@@ -1133,7 +1133,7 @@ function supprimer_ra() {
 
 function fermer_fenetre(opt) {
   if(opt == 1) {
-    var rep = confirm('Si vous fermez cette fen√™tre sans avoir sauvegard√© les donn√©es,\nvous risquez de perdre les modifications effectu√©es.\n\nVoulez-vous fermer cette fen√™tre ?');
+    var rep = confirm('Si vous fermez cette fenÍtre sans avoir sauvegardÈ les donnÈes,\nvous risquez de perdre les modifications effectuÈes.\n\nVoulez-vous fermer cette fenÍtre ?');
     if(rep == true) {
       close();
     }
@@ -1146,7 +1146,7 @@ function fermer_fenetre(opt) {
 
 function imprimer_ra(opt) {
   if(opt == 1) {
-    var rep = confirm('Attention : Assurez-vous que vous avez sauvegard√©es les modifications r√©alis√©es.\nDans le cas contraire, elles seront irr√©m√©diablement perdues.\n\nVoulez-vous continuer l\'impression?');
+    var rep = confirm('Attention : Assurez-vous que vous avez sauvegardÈes les modifications rÈalisÈes.\nDans le cas contraire, elles seront irrÈmÈdiablement perdues.\n\nVoulez-vous continuer l\'impression?');
     if(rep == true) {
 	  return true;
     }
@@ -1188,131 +1188,131 @@ function remplissage_presence_ts(bouton) {
     switch(sel.value) {
       case ' ':
       case '0':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_dispo. Sa valeur est'+pres['nb_dispo'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_dispo. Sa valeur est'+pres['nb_dispo'].value);
         v = Number(pres['nb_dispo'].value);
         v -= cpte;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        pres['nb_dispo'].value = v;// ÔøΩ cause de l'arrondi
+        pres['nb_dispo'].value = v;// ù cause de l'arrondi
         break;
      case '1' :
      case '2' :
-        // ecrire_dans_console('Le compteur a modifi√© est nb_presence. Sa valeur est'+pres['nb_presence'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_presence. Sa valeur est'+pres['nb_presence'].value);
         v = Number(pres['nb_presence'].value);
         v -= cpte;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        pres['nb_presence'].value = v;// ÔøΩ cause de l'arrondi
+        pres['nb_presence'].value = v;// ù cause de l'arrondi
        break;
      case '3':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_cp. Sa valeur est'+pres['nb_cp'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_cp. Sa valeur est'+pres['nb_cp'].value);
         v = Number(pres['nb_cp'].value);
         v -= cpte;
         // // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        pres['nb_cp'].value = v;// ÔøΩ cause de l'arrondi
+        pres['nb_cp'].value = v;// ù cause de l'arrondi
        break;
       case '4':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_rtt. Sa valeur est'+pres['nb_rtt'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_rtt. Sa valeur est'+pres['nb_rtt'].value);
         v = Number(pres['nb_rtt'].value);
         v -= cpte;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        pres['nb_rtt'].value = v;// ÔøΩ cause de l'arrondi
+        pres['nb_rtt'].value = v;// ù cause de l'arrondi
        break;
      case '5':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_maladie. Sa valeur est'+pres['nb_maladie'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_maladie. Sa valeur est'+pres['nb_maladie'].value);
         v = Number(pres['nb_maladie'].value);
         v -= cpte;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        pres['nb_maladie'].value = v;// ÔøΩ cause de l'arrondi
+        pres['nb_maladie'].value = v;// ù cause de l'arrondi
        break;
      case '6':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_recup. Sa valeur est'+pres['nb_recup'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_recup. Sa valeur est'+pres['nb_recup'].value);
         v = Number(pres['nb_recup'].value);
         v -= cpte;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        pres['nb_recup'].value = v;// ÔøΩ cause de l'arrondi
+        pres['nb_recup'].value = v;// ù cause de l'arrondi
        break;
      case '7':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_formation. Sa valeur est'+pres['nb_formation'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_formation. Sa valeur est'+pres['nb_formation'].value);
         v = Number(pres['nb_formation'].value);
         v -= cpte;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        pres['nb_formation'].value = v;// ÔøΩ cause de l'arrondi
+        pres['nb_formation'].value = v;// ù cause de l'arrondi
        break;
      case '8':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_excep. Sa valeur est'+pres['nb_excep'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_excep. Sa valeur est'+pres['nb_excep'].value);
         v = Number(pres['nb_excep'].value);
         v -= cpte;
-        pres['nb_excep'].value = v;// ÔøΩ cause de l'arrondi
+        pres['nb_excep'].value = v;// ù cause de l'arrondi
        break;
      case '9':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_sssolde. Sa valeur est'+pres['nb_sssolde'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_sssolde. Sa valeur est'+pres['nb_sssolde'].value);
         v = Number(pres['nb_sssolde'].value);
         v -= cpte;
-        pres['nb_sssolde'].value = v;// ÔøΩ cause de l'arrondi
+        pres['nb_sssolde'].value = v;// ù cause de l'arrondi
        break;
     }
     switch(remplir.value) {
       case ' ':
       case '0':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_dispo. Sa valeur est'+pres['nb_dispo'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_dispo. Sa valeur est'+pres['nb_dispo'].value);
         v = Number(pres['nb_dispo'].value);
         v += cpte;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        pres['nb_dispo'].value = v;// ÔøΩ cause de l'arrondi
+        pres['nb_dispo'].value = v;// ù cause de l'arrondi
         break;
      case '1' :
      case '2' :
-        // ecrire_dans_console('Le compteur a modifi√© est nb_presence. Sa valeur est'+pres['nb_presence'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_presence. Sa valeur est'+pres['nb_presence'].value);
         v = Number(pres['nb_presence'].value);
         v += cpte;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        pres['nb_presence'].value = v;// ÔøΩ cause de l'arrondi
+        pres['nb_presence'].value = v;// ù cause de l'arrondi
        break;
      case '3':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_cp. Sa valeur est'+pres['nb_cp'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_cp. Sa valeur est'+pres['nb_cp'].value);
         v = Number(pres['nb_cp'].value);
         v += cpte;
         // // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        pres['nb_cp'].value = v;// ÔøΩ cause de l'arrondi
+        pres['nb_cp'].value = v;// ù cause de l'arrondi
        break;
       case '4':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_rtt. Sa valeur est'+pres['nb_rtt'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_rtt. Sa valeur est'+pres['nb_rtt'].value);
         v = Number(pres['nb_rtt'].value);
         v += cpte;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        pres['nb_rtt'].value = v;// ÔøΩ cause de l'arrondi
+        pres['nb_rtt'].value = v;// ù cause de l'arrondi
        break;
      case '5':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_maladie. Sa valeur est'+pres['nb_maladie'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_maladie. Sa valeur est'+pres['nb_maladie'].value);
         v = Number(pres['nb_maladie'].value);
         v += cpte;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        pres['nb_maladie'].value = v;// ÔøΩ cause de l'arrondi
+        pres['nb_maladie'].value = v;// ù cause de l'arrondi
        break;
      case '6':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_recup. Sa valeur est'+pres['nb_recup'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_recup. Sa valeur est'+pres['nb_recup'].value);
         v = Number(pres['nb_recup'].value);
         v += cpte;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        pres['nb_recup'].value = v;// ÔøΩ cause de l'arrondi
+        pres['nb_recup'].value = v;// ù cause de l'arrondi
        break;
      case '7':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_formation. Sa valeur est'+pres['nb_formation'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_formation. Sa valeur est'+pres['nb_formation'].value);
         v = Number(pres['nb_formation'].value);
         v += cpte;
         // ecrire_dans_console('La nouvelle valeur de v est : '+v);
-        pres['nb_formation'].value = v;// ÔøΩ cause de l'arrondi
+        pres['nb_formation'].value = v;// ù cause de l'arrondi
        break;
      case '8':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_excep. Sa valeur est'+pres['nb_excep'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_excep. Sa valeur est'+pres['nb_excep'].value);
         v = Number(pres['nb_excep'].value);
         v += cpte;
-        pres['nb_excep'].value = v;// ÔøΩ cause de l'arrondi
+        pres['nb_excep'].value = v;// ù cause de l'arrondi
        break;
      case '9':
-        // ecrire_dans_console('Le compteur a modifi√© est nb_sssolde. Sa valeur est'+pres['nb_sssolde'].value);
+        // ecrire_dans_console('Le compteur a modifiÈ est nb_sssolde. Sa valeur est'+pres['nb_sssolde'].value);
         v = Number(pres['nb_sssolde'].value);
         v += cpte;
-        pres['nb_sssolde'].value = v;// ÔøΩ cause de l'arrondi
+        pres['nb_sssolde'].value = v;// ù cause de l'arrondi
        break;
     }
   }
@@ -1346,7 +1346,7 @@ function remplissage_presence(bouton) {
   cpte_pres = Number(pres['nb_presence'].value);
   cpte_dispo = Number(pres['nb_dispo'].value);
   ecrire_dans_console('sel_id prend la valeur '+sel_id+'. La valeur de bvaleur est '+bvalue);
-  if(sel_id == 0) {// tous les champs sont sÔøΩlectionnÔøΩs
+  if(sel_id == 0) {// tous les champs sont sùlectionnùs
     for (var i = 1; i <= nb_jours; i++) {
        pres_matin = 'pmatin_'+i;
        pres_aprem = 'paprem_'+i;
@@ -1435,8 +1435,8 @@ function ra_charge(){
   if(!(args.maj === undefined)) {
 //    ecrire_dans_console('Le parametre maj existe dans l\'URL '+location.search.substring(1));
     var racine = opener.document.getElementById('ra_ecran_mensuel');
-//    ecrire_dans_console('Le nodeName de racine est : '+racine.nodeName+' son Id est : '+racine.id+' Son nobre d\'enfants est √©gale √† : '+racine.childNodes.length);
-    if(args.action == 'edition') {// Modification de la ligne de 'cr√©ation'
+//    ecrire_dans_console('Le nodeName de racine est : '+racine.nodeName+' son Id est : '+racine.id+' Son nobre d\'enfants est Ègale ‡ : '+racine.childNodes.length);
+    if(args.action == 'edition') {// Modification de la ligne de 'crÈation'
       var elt_a = opener.document.createElement("a");
       var text_a = opener.document.createTextNode(args.maj);
       elt_a.appendChild(text_a);
@@ -1445,7 +1445,7 @@ function ra_charge(){
       elt_a.setAttribute("title", 'Editer');
       elt_a.setAttribute("target", 'Edition');
       elt_a.setAttribute("href", url);
-//      ecrire_dans_console('Valeur href de elt_a : '+elt_a.getAttribute("href")+'\nValeur de title : '+elt_a.title+'\nValeur de text : '+elt_a.firstChild.nodeValue+'\nValeur de target : '+elt_a.target);
+      //ecrire_dans_console('Valeur href de elt_a : '+elt_a.getAttribute("href")+'\nValeur de title : '+elt_a.title+'\nValeur de text : '+elt_a.firstChild.nodeValue+'\nValeur de target : '+elt_a.target);
       var frag = opener.document.createDocumentFragment();
       var a_edit = opener.document.createElement("a");
       a_edit.setAttribute("target", 'Edition');
@@ -1460,7 +1460,7 @@ function ra_charge(){
       var a_del = opener.document.createElement("a");
       a_del.setAttribute("target", 'Suppression');
       var url_del = url.replace(/edition/, 'suppression');
-	  url_del = url.replace(/show.pl/, 'delete.pl');
+	    url_del = url.replace(/show.pl/, 'delete.pl');
       a_del.setAttribute("href", url_del);
       var del_img = opener.document.createElement("img");
       del_img.setAttribute("alt", 'Supprimer-'+args.maj);
@@ -1468,13 +1468,27 @@ function ra_charge(){
       del_img.setAttribute("src", base+'/images/page_delete.png');
       a_del.appendChild(del_img);
       frag.appendChild(a_del);
+      if(args.maj != 'Technologies et Services' && args.maj != 'Global') {
+        frag.appendChild(opener.document.createTextNode(unescape('%20')));
+        var a_facture = opener.document.createElement("a");
+        a_facture.setAttribute("target", 'Facturation');
+        var url_facture = url.replace(/edition/, 'suppression');
+        url_facture = url.replace(/show.pl/, 'facture.pl');
+        a_facture.setAttribute("href", url_facture);
+        var facture_img = opener.document.createElement("img");
+        facture_img.setAttribute("alt", 'Facturer-'+args.maj);
+        facture_img.setAttribute("title", 'Facturer');
+        facture_img.setAttribute("src", base+'/images/euro-16.png');
+        a_facture.appendChild(facture_img);
+        frag.appendChild(a_facture);
+      }
       var text_edit = opener.document.createTextNode('A valider');
     }
     var enfants = racine.childNodes;
-// On ne tient pas compte des 2 premiÔøΩres lignes du tableau
+    //On ne tient pas compte des 2 premiùres lignes du tableau
     for(var i = 2; i < enfants.length; i++) {
       if(nb_maj < 3) {
-//        ecrire_dans_console('indice = '+i+' : Son parent est : '+enfants[i].parentNode.nodeName+' avec pour Id : '+enfants[i].parentNode.id+' et pour class : '+enfants[i].parentNode.className);
+        //ecrire_dans_console('indice = '+i+' : Son parent est : '+enfants[i].parentNode.nodeName+' avec pour Id : '+enfants[i].parentNode.id+' et pour class : '+enfants[i].parentNode.className);
         if(enfants[i].className ==  'ra_ligne3col') {
           traite_ra_ligne3col(enfants[i], i, args, elt_a, frag, text_edit);
         }
@@ -1490,13 +1504,14 @@ function traite_ra_ligne3col(obj, lg, args, elt_a, frag, text_edit) {
   var enfants = obj.childNodes;
   for(var i = 0; i < enfants.length; i++) {
     if(enfants[i].nodeName == 'A') {
+      //ecrire_dans_console('enfants[i].nodeName = '+enfants[i].nodeName+', enfants['+i+'].firstChild.nodeType = '+enfants[i].firstChild.nodeType);
       if(enfants[i].firstChild.nodeType == Node.TEXT_NODE) {
-        if((enfants[i].title == 'Cr√©er') && (enfants[i].target == 'Creation')&& (enfants[i].firstChild.data == args.maj)) {
+        if((enfants[i].title == 'CrÈer') && (enfants[i].target == 'Creation')&& (enfants[i].firstChild.data == args.maj)) {
 //          ecrire_dans_console('indice = '+i+' : Le nodeName est '+enfants[i].nodeName+' et son url est '+enfants[i].href+'\n La class de son parent est '+enfants[i].parentNode.className+' son title est '+enfants[i].title+' Sa target est '+enfants[i].target+' Son texte est '+enfants[i].firstChild.nodeValue);
           enfants[i].parentNode.replaceChild(elt_a, enfants[i]);
           ligne_creation = lg;
           nb_maj++;
-//          ecrire_dans_console('indice = '+i+' : Le nodeName est '+enfants[i].nodeName+' et son url modifi√© est '+enfants[i].href+'\n La class de son parent est '+enfants[i].parentNode.className+' son title est '+enfants[i].title+' Sa target est '+enfants[i].target+' Son texte est '+enfants[i].firstChild.nodeValue);
+//          ecrire_dans_console('indice = '+i+' : Le nodeName est '+enfants[i].nodeName+' et son url modifiÈ est '+enfants[i].href+'\n La class de son parent est '+enfants[i].parentNode.className+' son title est '+enfants[i].title+' Sa target est '+enfants[i].target+' Son texte est '+enfants[i].firstChild.nodeValue);
           return;
         }
 //       else {
@@ -1506,13 +1521,13 @@ function traite_ra_ligne3col(obj, lg, args, elt_a, frag, text_edit) {
       else {
         if(enfants[i].firstChild.nodeName == 'IMG') {
 //          ecrire_dans_console('indice = '+i+' : Le nodeName est '+enfants[i].nodeName+' et son url est '+enfants[i].href+'\n La class de son parent est '+enfants[i].parentNode.className+' son title est '+enfants[i].title+' Sa target est '+enfants[i].target+'\nALT de son enfant : '+enfants[i].firstChild.alt);
-          if((enfants[i].firstChild.title == 'Cr√©er') && (enfants[i].target == 'Creation')&& (enfants[i].firstChild.alt == ('Cr√©er-'+args.maj))) {
+          if((enfants[i].firstChild.title == 'CrÈer') && (enfants[i].target == 'Creation')&& (enfants[i].firstChild.alt == ('CrÈer-'+args.maj))) {
             enfants[i].parentNode.replaceChild(frag, enfants[i]);
             nb_maj++;
             return;
           }
 //          else {
-//            ecrire_dans_console('Les valeurs du test sont : title : '+enfants[i].firstChild.title+', target : '+enfants[i].target+', Alt : '+enfants[i].firstChild.alt+' testÔøΩ avec la valeur \'CrÔøΩer-'+args.maj+'\'');
+//            ecrire_dans_console('Les valeurs du test sont : title : '+enfants[i].firstChild.title+', target : '+enfants[i].target+', Alt : '+enfants[i].firstChild.alt+' testù avec la valeur \'Crùer-'+args.maj+'\'');
 //          }
         }
       }
@@ -1527,9 +1542,9 @@ function traite_ra_ligne3col(obj, lg, args, elt_a, frag, text_edit) {
         }
       }
       else {
-//        ecrire_dans_console('Lancement rÔøΩcursif de traite_ra_ligne3col');
+//        ecrire_dans_console('Lancement rùcursif de traite_ra_ligne3col');
         traite_ra_ligne3col(enfants[i], lg, args, elt_a, frag, text_edit);
-//        ecrire_dans_console('Fin du lancement rÔøΩcursif de traite_ra_ligne3col');
+//        ecrire_dans_console('Fin du lancement rùcursif de traite_ra_ligne3col');
       }
     }
   }
@@ -1541,6 +1556,6 @@ function AfficheNomsProprietes(obj) {
   for(var nom in obj) {
     noms += nom+'  ';
   }
-  ecrire_dans_console("les propri√©t√©s de l'objet "+obj.name+" sont :\n"+noms);
+  ecrire_dans_console("les propriÈtÈs de l'objet "+obj.name+" sont :\n"+noms);
 
 }
