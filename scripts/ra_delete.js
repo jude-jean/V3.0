@@ -31,30 +31,41 @@ function recup_args() {
       args[nom] = unescape(valeur);
     }
     catch(e) {
-      alert('unescape(): Problï¿½me de codage avec la valeur de '+nom+' ï¿½gale ï¿½ '+valeur);
+      alert('unescape(): Problme de codage avec la valeur de '+nom+' gale  '+valeur);
       try {
         args[nom] = decodeURIComponent(valeur);
       }
       catch(e) {
         args[nom] = valeur;
-        alert('decodeURIComponent(): Problï¿½me de codage avec la valeur de '+nom+' ï¿½gale ï¿½ '+args[nom]);
+        alert('decodeURIComponent(): Problme de codage avec la valeur de '+nom+' gale  '+args[nom]);
       }
       finally {
-        alert('Le dï¿½codage pour la valeur de '+nom+ ' est ï¿½gale ï¿½ '+args[nom]);
+        alert('Le dcodage pour la valeur de '+nom+ ' est gale  '+args[nom]);
       }
     }
   }
   return args;
 }
 
+function ecrire_dans_console (texte) {
+  // Ecrire dans la console si elle est active ou ecrire dans alert
+    if (typeof console !== 'undefined') {
+          console.log(texte);    
+      }
+      else {
+          alert(texte);    
+      }
+  
+  }
+  
 
 function ma_gestion_erreur(msg, url, line) {
-  alert(' Une erreur est survenue dans le code Javscript, voici les dï¿½tails :\n Message d\'erreur : '+msg+'\n Ligne Nï¿½ : '+line);
+  alert(' Une erreur est survenue dans le code Javscript, voici les dtails :\n Message d\'erreur : '+msg+'\n Ligne N : '+line);
   return true;
 }
 
 function bouton_ok(obj) {
-//  alert("C'est la fonction bouton_ok est actionnï¿½e");
+//  alert("C'est la fonction bouton_ok est actionne");
   window.close();
   return false;
 }
@@ -66,28 +77,28 @@ var ligne_delete = -1;
 var nb_maj = 0;
 function modifie() {
   var args = recup_args();
-//  alert('Avant resize : \nLargeur = '+largeur+' Hauteur = '+hauteur+' Avail Largeur ='+screen.availWidth+' Avail Hauteur '+screen.availHeight+'\nLargeur ï¿½cran : '+screen.width+' hauteur ï¿½cran : '+screen.height);
+//  alert('Avant resize : \nLargeur = '+largeur+' Hauteur = '+hauteur+' Avail Largeur ='+screen.availWidth+' Avail Hauteur '+screen.availHeight+'\nLargeur cran : '+screen.width+' hauteur cran : '+screen.height);
   self.resizeTo(600, 420);
-//  alert('Aprï¿½s resize : \nLargeur = '+largeur+' Hauteur = '+hauteur+' Avail Largeur ='+screen.availWidth+' Avail Hauteur '+screen.availHeight+'\nLargeur ï¿½cran : '+screen.width+' hauteur ï¿½cran : '+screen.height);
+//  alert('Aprs resize : \nLargeur = '+largeur+' Hauteur = '+hauteur+' Avail Largeur ='+screen.availWidth+' Avail Hauteur '+screen.availHeight+'\nLargeur cran : '+screen.width+' hauteur cran : '+screen.height);
 //  alert('Valeur de status '+args.status);
   if((args.status == 'ok') || (args.nb_lig == '0E0')) {
     var racine = opener.document.getElementById('ra_ecran_mensuel');
     var cree_a = opener.document.createElement("a");
-    var url = '/cgi-bin/V3.0/rapports_activites/ra/show.pl?ident_user='+args.ident_user+'&action=creation&annee='+args.annee+'&mois='+args.mois+'&client_id='+args.client_id+'&ident_id='+args.ident_id;
+    var url = base+'/rapports_activites/ra/show.pl?ident_user='+args.ident_user+'&action=creation&annee='+args.annee+'&mois='+args.mois+'&client_id='+args.client_id+'&ident_id='+args.ident_id;
 //    alert('Valeur de url dans modifie() : '+url);
-//    cree_a.setAttribute("title", 'Crï¿½er');
+//    cree_a.setAttribute("title", 'Crer');
     cree_a.setAttribute("target", 'Creation');
     cree_a.setAttribute("href", url);
     var cree_img = opener.document.createElement("img");
-    cree_img.setAttribute("alt", 'Crï¿½er-'+args.client);
-    cree_img.setAttribute("title", 'Crï¿½er');
+    cree_img.setAttribute("alt", 'Créer-'+args.client); 
+    cree_img.setAttribute("title", 'Créer');
     cree_img.setAttribute("src", base+'/images/page_blank.png');
     cree_a.appendChild(cree_img);
 //    var text_del = opener.document.createTextNode(' ');
 //    var frag = opener.document.createDocumentFragment();
     var enfants = racine.childNodes;
-//    alert('Nbre d\'ï¿½lï¿½ments de la variable enfants : '+enfants.length+'\nLa valeur de la variable nb_maj = '+nb_maj);
-// On ne tient pas compte des 2 premiï¿½res lignes du tableau
+//    alert('Nbre d\'lments de la variable enfants : '+enfants.length+'\nLa valeur de la variable nb_maj = '+nb_maj);
+// On ne tient pas compte des 2 premires lignes du tableau
     for(var i = 2; i < enfants.length; i++) {
       if(nb_maj < 3) {
 //        alert('indice = '+i+' : Son parent est : '+enfants[i].parentNode.nodeName+' avec pour Id : '+enfants[i].parentNode.id+' et pour class : '+enfants[i].parentNode.className);
@@ -101,62 +112,69 @@ function modifie() {
       }
     }
     if(nb_maj < 3) {
-      alert('La mise en jour de la fï¿½netre principale de l\'application n\'a pas pu ï¿½tre entiï¿½rement menï¿½e ï¿½ bien.\nIl vous est vivement conseillï¿½ d\'actualiser la page de votre navigateur pour prendre en compte les modifications survenues suite aux rï¿½centes actions que vous venez d\'entreprendre');
+      alert('La mise en jour de la fenêtre principale de l\'application n\'a pas pu être entièrement menée à bien.\nIl vous est vivement conseillé d\'actualiser la page de votre navigateur pour prendre en compte les modifications survenues suite aux récentes actions que vous venez d\'entreprendre');
     }
   }
 }
 
 var frag_enfants = 0;
 function traite_ra_ligne3col(obj, lg, args, url, cree_a) {
-  alert('Lacement de la fonction traite_ra_ligne3col avec les arguments : lg = '+lg+' url = '+url);
+  //alert('Lacement de la fonction traite_ra_ligne3col avec les arguments : lg = '+lg+' url = '+url);
   var enfants = obj.childNodes;
   for(var i = 0; i < enfants.length; i++) {
     if(enfants[i].nodeName == 'A') {
       if(enfants[i].firstChild.nodeType == Node.TEXT_NODE) {
         if((enfants[i].title == 'Editer') && (enfants[i].target == 'Edition')&& (enfants[i].firstChild.data == args.client)) {
           enfants[i].setAttribute("target", 'Creation');
-          enfants[i].setAttribute("title", 'Crï¿½er');
+          enfants[i].setAttribute("title", 'Créer');
           enfants[i].setAttribute("href", url);
           ligne_delete = lg;
           nb_maj++;
-//          alert('indice = '+i+' : Le nodeName est '+enfants[i].nodeName+' et son url modifiï¿½ est '+enfants[i].href+'\n La class de son parent est '+enfants[i].parentNode.className+' son title est '+enfants[i].title+' Sa target est '+enfants[i].target+' Son texte est '+enfants[i].firstChild.nodeValue);
+          //alert('indice = '+i+' : Le nodeName est '+enfants[i].nodeName+' et son url modifi est '+enfants[i].href+'\n La class de son parent est '+enfants[i].parentNode.className+' son title est '+enfants[i].title+' Sa target est '+enfants[i].target+' Son texte est '+enfants[i].firstChild.nodeValue);
           return;
         }
       }
       else {
-        var frere;
+        var frere, j = 0;
         if(enfants[i].firstChild.nodeName == 'IMG') {
-//          alert('indice = '+i+' : Le nodeName est '+enfants[i].nodeName+' et son url est '+enfants[i].href+'\n La class de son parent est '+enfants[i].parentNode.className+' son title est '+enfants[i].title+' Sa target est '+enfants[i].target+'\nALT de son enfant : '+enfants[i].firstChild.alt);
+          //alert('indice = '+i+' : Le nodeName est '+enfants[i].nodeName+' et son url est '+enfants[i].href+'\n La class de son parent est '+enfants[i].parentNode.className+' son title est '+enfants[i].title+' Sa target est '+enfants[i].target+'\nALT de son enfant : '+enfants[i].firstChild.alt);
           if((enfants[i].firstChild.title == 'Editer') && (enfants[i].target == 'Edition')&& (enfants[i].firstChild.alt == ('Editer-'+args.client))) {
             enfants[i].parentNode.replaceChild(cree_a, enfants[i]);
+            //ecrire_dans_console('j = '+j);
             frere = enfants[i].nextSibling;
-//            if(frere != null) {
-//              alert('frere est diffï¿½rent de null, son NodeName = '+frere.nodeName+', son texte est <'+frere.data+'> La class de son parent est '+frere.parentNode.className);
-//            }
-//            alert('indice = '+i+' : Le nodeName est '+enfants[i].nodeName+' et son url modifiï¿½ est '+enfants[i].href+'\n La class de son parent est '+enfants[i].parentNode.className+' son title est '+enfants[i].title+' Sa target est '+enfants[i].target+'\nALT de son enfant : '+enfants[i].firstChild.alt);
-//            if((frere.nodeType == Node.TEXT_NODE) && (frere.data == unescape('%20'))) {
-            if(frere.nodeType == Node.TEXT_NODE) {
-//              alert('Ce noeud est ï¿½ supprimer : indice = '+i+' : Le nodeName est '+frere.nodeName+' et son texte est '+frere.data+'\n La class de son parent est '+enfants[i].parentNode.className);
+            // Suppression dans l'ordre de l'espace
+            if(frere != undefined && frere.nodeType == Node.TEXT_NODE) {
+              //alert('Ce noeud est  supprimer : indice = '+i+' : Le nodeName est '+frere.nodeName+' et son texte est '+frere.data+'\n La class de son parent est '+enfants[i].parentNode.className);
               enfants[i].parentNode.removeChild(frere);
+              //ecrire_dans_console('j = '+j+' remove espace');
               frere = enfants[i].nextSibling;
-//              if(frere != null) {
-//                alert('frere est diffï¿½rent de null, son NodeName = '+frere.nodeName+' La class de son parent est '+frere.parentNode.className);
-//              }
-              if((frere.firstChild.title == 'Supprimer') && (frere.target == 'Suppression')&& (frere.firstChild.alt == ('Supprimer-'+args.client))) {
-//                alert('Ce noeud est ï¿½ supprimer : indice = '+i+' : Le nodeName est '+enfants[i].nodeName+' et son url est '+enfants[i].href+'\n La class de son parent est '+enfants[i].parentNode.className+' son title est '+enfants[i].title+' Sa target est '+enfants[i].target+'\nALT de son enfant : '+enfants[i].firstChild.alt);
-                enfants[i].parentNode.removeChild(frere);
-                nb_maj++;
-                return;
-              }
             }
-            else {
-//              alert('Les caractï¿½ristiques du noeud frere non supprimï¿½ sont : son type : <'+frere.nodeType+'> Sa valeur : <'+frere.data+'> La class de son parent : '+frere.parentNode.className);
-              return;
+            // Suppression de noeud Supprimer
+            if((frere != undefined && frere.firstChild.title == 'Supprimer') && (frere.target == 'Suppression')&& (frere.firstChild.alt == ('Supprimer-'+args.client))) {
+            //alert('Ce noeud est  supprimer : indice = '+i+' : Le nodeName est '+enfants[i].nodeName+' et son url est '+enfants[i].href+'\n La class de son parent est '+enfants[i].parentNode.className+' son title est '+enfants[i].title+' Sa target est '+enfants[i].target+'\nALT de son enfant : '+enfants[i].firstChild.alt);
+              enfants[i].parentNode.removeChild(frere);
+              //ecrire_dans_console('j = '+j+' remove Supprimer');
+              frere = enfants[i].nextSibling;
+              nb_maj++;
+            }
+            // Suppression de l'espace
+            if(frere != undefined && frere.nodeType == Node.TEXT_NODE) {
+              //alert('Ce noeud est  supprimer : indice = '+i+' : Le nodeName est '+frere.nodeName+' et son texte est '+frere.data+'\n La class de son parent est '+enfants[i].parentNode.className);
+              enfants[i].parentNode.removeChild(frere);
+              //ecrire_dans_console('j = '+j+' remove espace');
+              frere = enfants[i].nextSibling;
+            }
+            // Suppression du noeud Facturer                            
+            if((frere != undefined && frere.firstChild.title == 'Facturer') && (frere.target == 'Facturation')&& (frere.firstChild.alt == ('Facturer-'+args.client))) {
+              //alert('Ce noeud est  supprimer : indice = '+i+' : Le nodeName est '+enfants[i].nodeName+' et son url est '+enfants[i].href+'\n La class de son parent est '+enfants[i].parentNode.className+' son title est '+enfants[i].title+' Sa target est '+enfants[i].target+'\nALT de son enfant : '+enfants[i].firstChild.alt);
+                enfants[i].parentNode.removeChild(frere);
+                //ecrire_dans_console('j = '+j+' remove Facturer');
+                //nb_maj++;
             }
           }
-//          else {
-//            alert('Les valeurs du test sont : title : '+enfants[i].firstChild.title+', target : '+enfants[i].target+', Alt : '+enfants[i].firstChild.alt+' testï¿½ avec la valeur \'Crï¿½er-'+args.maj+'\'');
-//          }
+          //else {
+          //  alert('Les valeurs du test sont : title : '+enfants[i].firstChild.title+', target : '+enfants[i].target+', Alt : '+enfants[i].firstChild.alt+' test avec la valeur \'Crer-'+args.maj+'\'');
+          //}
         }
       }
     }
@@ -166,14 +184,14 @@ function traite_ra_ligne3col(obj, lg, args, url, cree_a) {
         if(ligne_delete == lg) {
 //          alert('Indice = '+i+' Son parent est : '+enfants[i].parentNode.nodeName+' avec pour Id : '+enfants[i].parentNode.id+' et pour class : '+enfants[i].parentNode.className+' nbligne = '+ligne_delete+' lg = '+lg);
           enfants[i].data = ' '; // en attendant de changer la taille du div
-//          alert('Le noeud text a ï¿½tï¿½ modifï¿½ et a pour valeur actuelle '+enfants[i].data+'\nLes caractï¿½ritisques du noeud modifiï¿½es sont :la classe de son parent est '+enfants[i].parentNode.className+' nbligne = '+ligne_delete+' lg = '+lg);
+//          alert('Le noeud text a t modif et a pour valeur actuelle '+enfants[i].data+'\nLes caractritisques du noeud modifies sont :la classe de son parent est '+enfants[i].parentNode.className+' nbligne = '+ligne_delete+' lg = '+lg);
           nb_maj++;
         }
       }
       else {
-//        alert('Lancement rï¿½cursif de traite_ra_ligne3col');
+//        alert('Lancement rcursif de traite_ra_ligne3col');
         traite_ra_ligne3col(enfants[i], lg, args, url, cree_a);
-//        alert('Fin du lancement rï¿½cursif de traite_ra_ligne3col');
+//        alert('Fin du lancement rcursif de traite_ra_ligne3col');
       }
     }
 
