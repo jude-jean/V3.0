@@ -1,0 +1,224 @@
+#!/usr/bin/perl -w
+# Magasin de chemises et chaussures
+use strict;
+#use utf8;                      # Source code is encoded using UTF-8.
+use Encode qw(encode decode);
+#use open ':encoding(UTF-8)';   # Set default encoding for file handles.
+#BEGIN { binmode(STDOUT, ':encoding(UTF-8)'); }  # HTML
+#BEGIN { binmode(STDERR, ':encoding(UTF-8)'); }  # Error log
+
+
+use CGI qw(:all);
+use CGI::Carp qw(fatalsToBrowser);
+use URI::Escape;
+use DBI;
+
+
+# Déclaration du répertoire de base
+#our $rep = '../../../../test/jude/V3.0';
+# Déclaration pour javascript
+# liste des fonctions à lancer en fonction du paramètre action
+my %action = (
+ 'facture'              => \&creer_facture ,
+ #'edition'               => \&editer_ra,
+ #'impression'           => \&afficher_ra, #La modification importante se trouve dans entete_standard avec la fonction javascript
+ #'affichage'             => \&afficher_ra,
+);
+my $action;
+
+our %parametres =();
+# Déclaration des identifications de connexion
+my ($id, $id_ra, $nom_client);
+#my $login;
+our (@collaborateur, $dbh);
+#my $tps_connexion = 600; # Délai de connexion sans inactivité
+
+# Tableau des RA
+#our (@ra, @ra_ast, @ra_comment, @ra_global, @ra_hsup, @ra_pres);
+
+# Les variables de la facturation
+our ($facture, $client, $tauxPrestation, $user);
+
+#Liste des clients pour le salarié
+#our (@clients, %clients);
+#our %tous_clients = (0, 'T&S'); # Hachage incluant T&S et les autres clients
+
+our $cgi = new CGI;
+#Connexion à la base de données.
+our ($rep, $rep_pl);
+if($cgi->server_name =~ /etechnoserv/) {
+#Connexion à la base de données.
+	$dbh = DBI->connect("dbi:mysql:database=db447674934;host=db447674934.db.1and1.com;user=dbo447674934;password=t1ands6")
+	or die "problème de connexion à la base de données db447674934 : $!";
+	# Déclaration du répertoire de base
+	$rep = '../..';
+	$rep_pl = '/jude/V3.0';
+	use lib "/homepages/42/d74330965/htdocs/jude/V3.0/lib/";
+}
+else {
+#Connexion à la base de donnï¿½e.
+	$dbh = DBI->connect("DBI:mysql:database=collaborateur", "root", "t1ands6")
+	or die "problème de connexion à la base de données collaborateur : $!";
+	$rep = '../../../../test/jude/V3.0';
+	$rep_pl = '/cgi-bin/V3.0';
+	use lib "/usr/lib/cgi-bin/V3.0/lib";
+}
+use RapportActivite qw(gestion_ra);
+use JourDeFete qw(est_ferie est_jour_ferie Delta_Dates_AMJ);
+use Etechnoserv;
+use Connexion;
+use Ra;
+use Facture;
+
+my %script = (
+        'language'           => "javascript",
+        'src'                => "$rep/scripts/outils.js",
+);
+# Dï¿½claration des feuilles de styles
+my @liens = [
+       Link({
+         'rel'             => 'stylesheet',
+         'type'            => 'text/css',
+         'href'            => "$rep/styles/facture.css",
+         'media'           => 'screen',
+       }),
+       Link({
+         'rel'             => 'stylesheet',
+         'type'            => 'text/css',
+         'href'            => "$rep/styles/facture_print.css",
+         'media'           => 'print',
+       }),
+       Link({
+         'rel'             => 'shortcut icon',
+         'href'            => "$rep/images/favicon.ico",
+       }),
+];
+
+lecture_parametres(\%parametres);
+if($parametres{mois} =~ /vrier$/) {
+  $parametres{mois} = 'Février';
+  $parametres{mois_num} = '2';
+}
+if($parametres{mois} =~ /^Ao/) {
+  $parametres{mois} = 'Août';
+  $parametres{mois_num} = '8';
+}
+if($parametres{mois} =~ /cembre$/) {
+  $parametres{mois} = 'Décembre';
+  $parametres{mois_num} = '12';
+}
+if($parametres{mois} =~ /Janvier/) {
+  $parametres{mois_num} = '1';
+}
+if($parametres{mois} =~ /Mars/) {
+  $parametres{mois_num} = '3';
+}
+if($parametres{mois} =~ /Avril/) {
+  $parametres{mois_num} = '4';
+}
+if($parametres{mois} =~ /Mai/) {
+  $parametres{mois_num} = '5';
+}
+if($parametres{mois} =~ /Juin/) {
+  $parametres{mois_num} = '6';
+}
+if($parametres{mois} =~ /Juillet/) {
+  $parametres{mois_num} = '7';
+}
+if($parametres{mois} =~ /Septembre/) {
+  $parametres{mois_num} = '9';
+}
+if($parametres{mois} =~ /Octobre/) {
+  $parametres{mois_num} = '10';
+}
+if($parametres{mois} =~ /Novembre/) {
+  $parametres{mois_num} = '11';
+}
+visu_parametres();
+@collaborateur = info_id($parametres{ident_id});
+unless (@collaborateur) {
+	entete_standard(); 
+	print "Le parametre ident_id n'est pas défini dans la base de donnée", $cgi->br();
+	visu_parametres(\%parametres);
+	print $cgi->end_html();
+#	die "Le parametre $parametres{ident_id} n'est pas défini dans la base dans la base de données";
+	exit;
+}
+if(verif_tps_connexion() == 0) { #Délai d'attente dépassé
+	print $cgi->redirect("$rep_pl/etechnoserv.pl?err=3");
+	exit;
+}
+$action = $cgi->param('action') || 'facture';
+&{$action{$action}}();
+#creer_ra();
+
+exit;
+
+sub creer_facture {
+  entete_standard();
+  rechercheInfosClient();
+  #recherche_liste_clients();
+  #recherche_ra();
+  print $cgi->start_div({-id => 'ecran'});
+#  print $cgi->h1("Rapport d'activité de $parametres{mois} $parametres{annee} pour le login $parametres{ident_user}");
+  #affiche_entete();
+  #genere_mois($parametres{action});
+  #$parametres{mois} = 'Jude';
+  #my $decodeMois = decode('utf-8', $parametres{mois});
+
+  print $cgi->start_form(-id =>'f_facture', -action => "$rep_pl/rapports_activites/ra/facture.pl?action=creation&annee=$parametres{annee}&mois=$parametres{mois}&client_id=$parametres{client_id}&ident_user=$parametres{ident_user}&ident_id=$parametres{ident_id}");
+  #print $cgi->hidden(-name => 'nb_jours', -value =>"$nb_jours");
+  print $cgi->hidden(-name => 'action', -value =>'$parametres{action}');
+  print $cgi->hidden(-name => 'annee', -value =>'$parametres{annee}');
+  print $cgi->hidden(-name => 'mois', -value =>'$parametres{mois}');
+  #print "decodeMois = $decodeMois";
+  print $cgi->hidden(-name => 'client_id', -value =>"$parametres{client_id}");
+  print $cgi->hidden(-name => 'ident_user', -value =>'$parametres{ident_user}');
+  print $cgi->hidden(-name => 'ident_id', -value =>'$parametres{ident_id}');
+  gestion_champs_caches();
+  affiche_facture($parametres{action});
+  print $cgi->end_form(), $cgi->end_div(), $cgi->end_html();
+}
+
+
+sub entete_standard {
+	print $cgi->header();
+	if ($parametres{action} ne 'impression') { #  -encoding => 'UTF-8',
+		print $cgi->start_html({-head => @liens, -Title => "Factures v1.0", -script => \%script, -encoding => 'UTF-8', -base => 'true', -onLoad =>"return ra_charge();"});
+	}
+	else {
+		print $cgi->start_html({-head => @liens, -Title => "Factures v1.0", -script => \%script, -encoding => 'UTF-8', -base => 'true', -onLoad =>"return imprimer_ra();"});
+	}
+}
+
+############## Requêtes SQL ###################################################
+# Quand on recherche les donnï¿½es du RA, on a besoin de connaitre la liste des
+# clients afin me mettre le nom du client dans les tranches de prï¿½sence qui ont
+# ï¿½tï¿½ rï¿½servï¿½es par le collaborateur dans le RA de ce client.
+#  my $client;
+#  my $sql = 'SELECT t1.id, t1.nom FROM client t1, affectation t2 WHERE (t2.idcollaborateur = '.$dbh->quote($collaborateur[0]).') AND (t2.idclient = t1.id)';
+##  print $cgi->br(), "Liste des clients pour l'utilisateur $collaborateur[1]", $cgi->br();
+#  my $sth = $dbh->prepare($sql);
+#  $sth->execute();
+#  while($client = $sth->fetchrow_arrayref) {
+#    if($client->[0] != $parametres{client_id}) {
+#      #(0,..0) pour les hsup et les astreintes
+#      push @clients, [ @$client, 0, 0, 0, 0, 0, 0, 0, 0 ];
+#      $clients{$client->[0]} = $client->[1];
+#    }
+#    $tous_clients{$client->[0]} = $client->[1];
+#
+#  }
+#  push @clients, [ 0, 'Technologies et Services', 0, 0, 0, 0, 0, 0, 0, 0 ];
+#  print "La taille de \@clients est de : ",1 + $#clients;
+#  foreach (@clients) {
+#    print " [$_->[1] : $_->[0]]";
+#  }
+
+sub rechercheInfosClient() {
+  my $sql = 'Select nom, adresse, adresse2, codepostal, ville, pays From client where id = '.$dbh->quote($parametres{client_id});
+  my $sth = $dbh->prepare($sql);
+  $sth->execute();
+  $client = $sth->fetchrow_arrayref;
+  #print $cgi->span($client);
+}

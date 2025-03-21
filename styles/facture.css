@@ -1,0 +1,29 @@
+.adresseFacture {
+    margin-left: 600px;    
+}
+
+.nomClientFacture {
+    font-weight: bold;
+    display: block;
+}
+
+.adresseClientFacture {
+    display: block;
+}
+
+.adresse2ClientFacture {
+    display: block;
+}
+
+.codePostalClientFacture {
+    margin-right: 2px; 
+    /*display: inline; */
+}
+
+/*.villeClientFacture {
+    display: inline;
+}*/
+
+.paysClientFacture {
+    display: block;
+}
