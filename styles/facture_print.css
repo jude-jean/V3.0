@@ -1,0 +1,139 @@
+/*.header {
+    background-image: url('../../images/logo-h90.png');
+    background-position: center;  
+}*/
+.facture {
+    margin-left: 40px;
+}
+
+body > #ecran {
+    width : 735px;
+}
+  
+#logo {
+      text-align : center;
+}
+
+.adresseFacture {
+    margin-left: 400px;
+    margin-top: 20px;   
+}
+
+.nomClientFacture {
+    font-weight: bold;
+    display: block;
+}
+
+.adresseClientFacture {
+    display: block;
+}
+
+.adresse2ClientFacture {
+    display: block;
+}
+
+.codePostalClientFacture {
+    margin-right: 2px; 
+    /*display: inline; */
+}
+
+/*.villeClientFacture {
+    display: inline;
+}*/
+
+.paysClientFacture {
+    display: block;
+}
+
+.intituleFacture {
+    margin-top: 80px;
+    /*margin-left: 350px;*/
+    text-align: center;
+    font-weight: bold;    
+}
+
+.referenceFacture {
+    margin-top: 80px;   
+}
+
+/*.tvaFacture {
+    margin-top: 20px;
+}*/
+
+.factureCreation {
+    margin-left: 30px;
+    margin-top: 15px;    
+}
+.titreFacture {
+    margin-top : 40px;
+    margin-left: 90px;
+    font-weight: bold;
+}
+
+#menu_actions {
+    margin-top: 20px;
+    margin-left: 70px;
+    display:none;
+}
+
+.dateFacture, .objetFacture {
+    margin-top: 20px;
+}
+
+table, td {
+    border: 1px solid black;
+}
+
+.tableauPrestations {
+    border-collapse: collapse;
+    border: 2px solid rgb(140 140 140);
+    font-family: sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    margin-top: 15px;
+  }
+  
+  
+.tableauPrestations th, .tableauPrestations td {
+    border: 1px solid rgb(160 160 160);
+    padding: 8px 10px;
+}
+
+thead, tfoot {
+  background-color: rgb(228 240 245);
+  font-weight: bold;
+}
+
+tfoot th {
+    text-align: right;
+}
+
+.currency {
+    text-align: right;
+}
+
+.currency::after{
+    content: ' €';
+}
+
+td.quantitej {
+    text-align: center;
+    ::after {
+        content: ' jr(s)';
+    }
+}
+
+td.quantiteh {
+    text-align: center;
+    ::after {
+        content: ' hr(s)';
+    }    
+}
+
+td:nth-of-type(3), td:nth-of-type(5) {
+    font-weight: bold;
+}
+
+.delaiPaiement {
+    margin-top: 15px;
+}

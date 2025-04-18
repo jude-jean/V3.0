@@ -22,7 +22,7 @@ my $periode_visu = 5;  # doit �tre sup�rieur � 2
 my (@ra, @ra_astreinte, @ra_comment, @ra_global, @ra_hsup, @ra_presence);
 my @clients;
 my $flag_ra_global;
-my ($action, $client_id, $ra_id);
+my ($action, $client_id, $ra_id, $fa_id);
 my $decodeMoisActif;
 my ($nb_jours, $mois_actif_num);
 
@@ -143,17 +143,23 @@ sub info_menu_mensuel {
   my $sth = $main::dbh->prepare($sql);
   $sth->execute;
   while($client = $sth->fetchrow_arrayref) {
-    push @clients, [ @$client, 0, 0 ];# [nom_du_client, client_id, ra_id, ra_etat]
+    push @clients, [ @$client, 0, 0, 0 ];# [nom_du_client, client_id, ra_id, ra_etat, facture_id]
   }
-  push @clients, ["Technologies et Services", 0, 0, 0];
+  push @clients, ["Technologies et Services", 0, 0, 0, 0]; # Jamais de facture_id pour T&S
   foreach (@clients) {
-    $sth = $main::dbh->prepare("SELECT id, valider FROM ra WHERE idclient = ? AND idcollaborateur = ? AND annee = ? AND mois = ? GROUP BY id");
-    $sth->execute($_->[1], $main::collaborateur[0], $annee_active, $mois_actif_num);
-    while(($ra_id, $ra_etat) = $sth->fetchrow_array) {
-      $_->[2] = $ra_id;
-      $_->[3] = $ra_etat;
-    }
-#    print "$_->[0] << $_->[1] $_->[2] $_->[3]>>" , $main::cgi->br;
+    #$sth = $main::dbh->prepare("SELECT id, valider FROM ra WHERE idclient = ? AND idcollaborateur = ? AND annee = ? AND mois = ? GROUP BY id");
+    #$sth->execute($_->[1], $main::collaborateur[0], $annee_active, $mois_actif_num);
+    #Utilisation d'une jointure LEFT JOIN pour pour récupérer aussi l'identifiant de la facture si elle existe.
+    $sql = 'SELECT t1.id, t1.valider, t2.id from ra t1 Left Join facture t2 ON t1.id = t2.raId where t1.idclient = '.$main::dbh->quote($_->[1]).' And t1.idcollaborateur = '.$main::dbh->quote($main::collaborateur[0]).' And t1.annee = '.$main::dbh->quote($annee_active).' And t1.mois = '.$main::dbh->quote($mois_actif_num);
+    #print "sql = $sql", $main::cgi->br;
+    $sth = $main::dbh->prepare($sql);
+    $sth->execute;
+    ($ra_id, $ra_etat, $fa_id) = $sth->fetchrow_array;
+    $_->[2] = $ra_id;
+    $_->[3] = $ra_etat;
+    $_->[4] = $fa_id;
+    
+    #print "$_->[0] << $_->[1], $_->[2], $_->[3], $_->[4]>>" , $main::cgi->br;   
   }
   $sth = $main::dbh->prepare("SELECT valider FROM ra_global WHERE idcollaborateur = ".$main::dbh->quote($main::collaborateur)." AND annee = ".$main::dbh->quote($annee_active)." AND mois = ".$main::dbh->quote($mois_actif));
   $sth->execute();
@@ -351,10 +357,18 @@ sub affiche_ecran_mensuel {
     if(($_->[2] > 0) && (($_->[3] == 0) || ($_->[3] == 2))) {
       print $main::cgi->div({-class => 'ra_ligne3col1'}, $main::cgi->a({-target =>'Edition', -title => 'Editer', -href => "$::rep_pl/rapports_activites/ra/show.pl?ident_user=$main::collaborateur[3]&action=edition&annee=$annee_active&mois=$mois_actif&client_id=$_->[1]&ra_id=$_->[2]&ident_id=$main::id"},"$_->[0]"));
       if($_->[0] !~ "Technologies et Services") { # Pas de facturation pour Technologies et Services
+        if($_->[4] != 0) {
         print $main::cgi->start_div({-class => 'ra_ligne3col2'}), $main::cgi->a({-target =>'Edition', -href => "$::rep_pl/rapports_activites/ra/show.pl?ident_user=$main::collaborateur[3]&action=edition&annee=$annee_active&mois=$mois_actif&nb_jours=$nb_jours&mois_num=$mois_actif_num&client_id=$_->[1]&ra_id=$_->[2]&ident_id=$main::id"}, $main::cgi->img({-src =>"$main::rep/images/page_edit.png", -alt => "Editer-$_->[0]", -title => 'Editer'})),
               "&nbsp", $main::cgi->a({-target =>'Suppression', -title => 'Supprimer', -href => "$::rep_pl/rapports_activites/ra/delete.pl?ident_user=$::collaborateur[3]&action=suppression&annee=$annee_active&mois=$mois_actif&client_id=$_->[1]&ra_id=$_->[2]&ident_id=$::id"}, $main::cgi->img({-src =>"$main::rep/images/page_delete.png", -alt => "Supprimer-$_->[0]", -title => 'Supprimer'})),
-              "&nbsp", $main::cgi->a({-target =>'Facturation', -title => 'Facturer', -href => "$::rep_pl/rapports_activites/ra/facture.pl?ident_user=$::collaborateur[3]&action=facture&annee=$annee_active&mois=$mois_actif&client_id=$_->[1]&ra_id=$_->[2]&ident_id=$::id"}, $main::cgi->img({-src =>"$main::rep/images/euro-16.png", -alt => "Facturer-$_->[0]", -title => 'Facturer'})),
+              "&nbsp", $main::cgi->a({-target =>'Facturation', -title => 'Facturer', -href => "$::rep_pl/rapports_activites/ra/facture.pl?ident_user=$::collaborateur[3]&action=edition&s_action=editer&annee=$annee_active&mois=$mois_actif&client_id=$_->[1]&ra_id=$_->[2]&facture_id=$_->[4]&ident_id=$::id"}, $main::cgi->img({-src =>"$main::rep/images/euro-16.png", -alt => "Facturer-$_->[0]", -title => 'Facturer'})),
               $main::cgi->end_div();
+        }
+        else {
+        print $main::cgi->start_div({-class => 'ra_ligne3col2'}), $main::cgi->a({-target =>'Edition', -href => "$::rep_pl/rapports_activites/ra/show.pl?ident_user=$main::collaborateur[3]&action=edition&annee=$annee_active&mois=$mois_actif&nb_jours=$nb_jours&mois_num=$mois_actif_num&client_id=$_->[1]&ra_id=$_->[2]&ident_id=$main::id"}, $main::cgi->img({-src =>"$main::rep/images/page_edit.png", -alt => "Editer-$_->[0]", -title => 'Editer'})),
+              "&nbsp", $main::cgi->a({-target =>'Suppression', -title => 'Supprimer', -href => "$::rep_pl/rapports_activites/ra/delete.pl?ident_user=$::collaborateur[3]&action=suppression&annee=$annee_active&mois=$mois_actif&client_id=$_->[1]&ra_id=$_->[2]&ident_id=$::id"}, $main::cgi->img({-src =>"$main::rep/images/page_delete.png", -alt => "Supprimer-$_->[0]", -title => 'Supprimer'})),
+              "&nbsp", $main::cgi->a({-target =>'Facturation', -title => 'Facturer', -href => "$::rep_pl/rapports_activites/ra/facture.pl?ident_user=$::collaborateur[3]&action=creation&annee=$annee_active&mois=$mois_actif&client_id=$_->[1]&ra_id=$_->[2]&ident_id=$::id"}, $main::cgi->img({-src =>"$main::rep/images/euro-16.png", -alt => "Facturer-$_->[0]", -title => 'Facturer'})),
+              $main::cgi->end_div();
+        }
       }
       else {
         print $main::cgi->start_div({-class => 'ra_ligne3col2'}), $main::cgi->a({-target =>'Edition', -href => "$::rep_pl/rapports_activites/ra/show.pl?ident_user=$main::collaborateur[3]&action=edition&annee=$annee_active&mois=$mois_actif&nb_jours=$nb_jours&mois_num=$mois_actif_num&client_id=$_->[1]&ra_id=$_->[2]&ident_id=$main::id"}, $main::cgi->img({-src =>"$main::rep/images/page_edit.png", -alt => "Editer-$_->[0]", -title => 'Editer'})),

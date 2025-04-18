@@ -1161,6 +1161,24 @@ function imprimer_ra(opt) {
     
 }
 
+function imprimer_facture(opt) {
+  ecrire_dans_console('impression facture');
+  let menuBouton = document.getElementById('menu_actions');
+  //menuBouton.style.display = 'none';
+  window.print();
+  //menuBouton.style.display = 'block';
+  return false;
+}
+
+function verifDateFacture() {
+  var dateCreationFacture = document.getElementById('dateCreationFacture');
+  if (dateCreationFacture.value == null || dateCreationFacture.value == '') {
+    alert('La saisie d\'une date de la facture est obligatoire.');
+    return false;
+  }   
+  return true;
+}
+
 function remplissage_presence_ts(bouton) {
   var pres = bouton.form;
   var sel = pres['bo_selectionner'];
@@ -1472,8 +1490,9 @@ function ra_charge(){
         frag.appendChild(opener.document.createTextNode(unescape('%20')));
         var a_facture = opener.document.createElement("a");
         a_facture.setAttribute("target", 'Facturation');
-        var url_facture = url.replace(/edition/, 'suppression');
-        url_facture = url.replace(/show.pl/, 'facture.pl');
+        var url_facture = url;
+        url_facture = url_facture.replace(/edition/, 'creation');
+        url_facture = url_facture.replace(/show.pl/, 'facture.pl');
         a_facture.setAttribute("href", url_facture);
         var facture_img = opener.document.createElement("img");
         facture_img.setAttribute("alt", 'Facturer-'+args.maj);
