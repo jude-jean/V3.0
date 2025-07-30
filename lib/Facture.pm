@@ -37,6 +37,11 @@ sub saisie_facture {
 
     #print $::cgi->start_table(), $::cgi->table_tr($::cgi->td("Nom du client"),$::cgi->td($::client->[0]));
     #print "@$::jourHeureAFacturer";
+    my $i = 0;
+    foreach(@::tauxTva) {
+        print $::cgi->hidden(-name => "tva_Id_$i", -value => $_->[0]);
+        $i++;
+    }
     print $::cgi->div({-class => 'titreFacture'}, "D&eacute;tails de la facture");
     print "<table class='factureCreation'>
     <tr class='factureCreationInfos'><td class='col1'>Nom du client</td><td class='col2'>$::client->[0]</td></tr>
@@ -77,13 +82,13 @@ sub saisie_facture {
     <tr><td>Date de cr&eacute;ation<div class='tooltip'><sup>*</sup><span class='tooltiptext'>La saisie d\'une date pour l\'&eacute;tablissement d\'une facture est obligatoire</span></div></td><td><input type='date' id='dateCreationFacture' name='dateCreation'/></td></tr>
     </table>";
     affiche_menu_s_actions();
-    if(scalar(%::tauxPrestationByType) == 0) {
-        afficheAvertissement();
+    if($::tauxPrestationExiste == 0) {
+        afficheAvertissement(1);
     }
-    print $::cgi->div("Taille de %::tauxPrestationByType = ".keys %::tauxPrestationByType);
-    foreach(keys %tauxPrestationByType) {
-      print 'Type = '.$_.': montant = '.$tauxPrestationByType{$_}->[0].', id = '.$tauxPrestationByType{$_}->[1], $cgi->br();
-    }        
+    #print $::cgi->div("Taille de %::tauxPrestationByType = ".keys %::tauxPrestationByType);
+    #foreach(keys %::tauxPrestationByType) {
+    #  print 'Type = '.$_.': montant = '.$tauxPrestationByType{$_}->[0].', id = '.$tauxPrestationByType{$_}->[1], $::cgi->br();
+    #}        
 #<tr><td>Type du montant de la prestation</td><td>".(($::tauxPrestation->[1] == 'j')? "Taux journalier":"Taux horaire")."</td></tr>
 }
 
@@ -132,7 +137,7 @@ sub affiche_facture {
     print $::cgi->end_div();
     affiche_menu_s_actions();
     if($::estAJour == 0) {
-        afficheAvertissement();
+        afficheAvertissement(2);
     }
     
 }
@@ -267,11 +272,23 @@ sub afficheDelaiPaiement() {
 }
 
 sub afficheAvertissement() {
-    print $::cgi->start_div({-class=>'avertissement', id => 'avertissement'});
-    print $::cgi->p({-class=>'avertissementHeader'}, "Avertissement !!"),
-        $::cgi->p({-class=>'avertissementBody'}, "Le rapport d'activit&eacute;s a chang&eacute; depuis la cr&eacute;ation de la facture.</br> Le nombre de jours de pr&eacute;sence actuellement d&eacute;fini dans le RA est de <strong>$::raControle->[5]</strong>.</br> La facture a &eacute;t&eacute; &eacute;tablie avec un nombre de jours facturables de <strong>$::facture->[9]</strong>.</br></br>Pour prendre en compte le nombre de jours du RA, il vous faut supprimer la facture existante et en cr&eacute;er une nouvelle");
-    print '<button onclick="document.getElementById(\'avertissement\').style.display = \'none\';return false;" aria-label="close" class="x">X</button>';
-    print $::cgi->end_div();
+    my ($avertissement) = @_;
+    if($avertissement == 1) {
+        print $::cgi->start_div({-class=>'avertissement', id => 'avertissement'});
+        print $::cgi->p({-class=>'avertissementHeader'}, "Avertissement !!"),
+            $::cgi->p({-class=>'avertissementBody'}, "Aucun taux de prestation n'est pas d&eacute;fini pour les dates de ce rapport d'activit&eacute;s. En l\'&eacute;tat, ll n\'est donc pas possible de cr&eacute;er cette facture.</br>Pour la cr&eacute;er, il faut au pr&eacute;alable cr&eacute;er un taux de prestation (horaire et/ou journalier) pour la p&eacute;riode de facturation de <strong>".$mois[($::parametres{mois_num} - 1)]." ".$::parametres{annee}."</strong> pour la soci&eacute; <strong>$::client->[0]</strong>.");
+        print '<button onclick="document.getElementById(\'avertissement\').style.display = \'none\';return false;" aria-label="close" class="x">X</button>';
+        print $::cgi->end_div();
+        return;
+    }
+    if($avertissement == 2) {        
+        print $::cgi->start_div({-class=>'avertissement', id => 'avertissement'});
+        print $::cgi->p({-class=>'avertissementHeader'}, "Avertissement !!"),
+            $::cgi->p({-class=>'avertissementBody'}, "Le rapport d'activit&eacute;s a chang&eacute; depuis la cr&eacute;ation de la facture.</br> Le nombre de jours de pr&eacute;sence actuellement d&eacute;fini dans le RA est de <strong>$::raControle->[5]</strong>.</br> La facture a &eacute;t&eacute; &eacute;tablie avec un nombre de jours facturables de <strong>$::facture->[9]</strong>.</br></br>Pour prendre en compte le nombre de jours du RA, il vous faut supprimer la facture existante et en cr&eacute;er une nouvelle");
+        print '<button onclick="document.getElementById(\'avertissement\').style.display = \'none\';return false;" aria-label="close" class="x">X</button>';
+        print $::cgi->end_div();
+        return;
+    }
 }
 
 sub affiche_menu_s_actions {
@@ -286,7 +303,13 @@ sub affiche_menu_s_actions {
 	}
 	elsif($::parametres{action} eq 'creation') {
 		#vers_sous_menu('Sauvegarder', -onclick =>"return verifDateFacture();");
-        print $::cgi->submit(-name =>'s_action', -value => 'Sauvegarder', -onclick =>"return verifDateFacture();");
+        if($::tauxPrestationExiste == 0) {
+            print $::cgi->submit(-name =>'s_action', -value => 'Sauvegarder', -onclick =>"return verifDateFacture();", -disabled => 'disabled');
+        }
+        else {
+            print $::cgi->submit(-name =>'s_action', -value => 'Sauvegarder', -onclick =>"return verifDateFacture();");
+        }
+        #print $::cgi->submit(-name =>'s_action', -value => 'Sauvegarder', -onclick =>"return verifDateFacture();");
 		print $::cgi->reset;
 		print $::cgi->submit(-name =>'Fermer', -onclick =>"return fermer_fenetre(1);");
 	}
@@ -320,6 +343,55 @@ sub convertMilliersToLocal() {
     }            
     return $initial;
 }
+
+sub IsLeapYear() {
+    # This subroutine determines if a year is a leap 
+    #     year or not. It is based on the Gregorian 
+    #     calendar, which was established in 1582. 
+    #     The Gregorian calendar is the calendar used 
+    #     by most of the world today.
+    # Either the value 0 or the value 1 is returned. 
+    #     If 0, it is not a leap year. If 1, it is a 
+    #     leap year. (Works for Julian calendar, 
+    #     established in 1582)  
+    # Accept the value sent to this subroutine. 
+
+    my $year = shift;   
+
+    # If $year is not evenly divisible by 4, it is 
+    #     not a leap year; therefore, we return the 
+    #     value 0 and do no further calculations in 
+    #     this subroutine. ("$year % 4" provides the 
+    #     remainder when $year is divided by 4. 
+    #     If there is a remainder then $year is 
+    #     not evenly divisible by 4.) 
+
+    return 0 if $year % 4;  
+
+    # At this point, we know $year is evenly divisible 
+    #     by 4. Therefore, if it is not evenly 
+    #     divisible by 100, it is a leap year -- 
+    #     we return the value 1 and do no further 
+    #     calculations in this subroutine.  
+
+    return 1 if $year % 100;    
+
+    # At this point, we know $year is evenly divisible 
+    #     by 4 and also evenly divisible by 100. Therefore, 
+    #     if it is not also evenly divisible by 400, it is 
+    #     not leap year -- we return the value 0 and do no 
+    #     further calculations in this subroutine.  
+
+    return 0 if $year % 400;    
+
+    # Now we know $year is evenly divisible by 4, evenly 
+    #     divisible by 100, and evenly divisible by 400. 
+    #     We return the value 1 because it is a leap year.  
+
+    return 1;
+}
+
+
 
 sub vers_sous_menu {
   print $::cgi->submit(-name=>'s_action', -value=>shift);

@@ -12,6 +12,7 @@ use CGI qw(:all);
 use CGI::Carp qw(fatalsToBrowser);
 use URI::Escape;
 use DBI;
+use Date::Calc qw(:all);
 
 
 # Déclaration du répertoire de base
@@ -47,7 +48,7 @@ our (@collaborateur, $dbh);
 #our (@ra, @ra_ast, @ra_comment, @ra_global, @ra_hsup, @ra_pres);
 
 # Les variables de la facturation
-our ($facture, $client, $tauxPrestation, $typeTauxPrestation, %tauxPrestationByType, $user, $nbreAFacturer, $jourHeureAFacturer, $montantFacture, $mission, $estAJour, $raControle);
+our ($facture, $client, $tauxPrestation, $typeTauxPrestation, %tauxPrestationByType, $tauxPrestationExiste, $user, $nbreAFacturer, $jourHeureAFacturer, $montantFacture, $mission, $estAJour, $raControle, @tauxTva);
 our ($secondes, $minutes, $heures, $jour, $mois, $annee) = (localtime)[0..5];
 
 #Liste des clients pour le salarié
@@ -146,6 +147,7 @@ if($parametres{mois} =~ /Novembre/) {
   $parametres{mois_num} = '11';
 }
 #visu_parametres();
+$tauxPrestationExiste = 0;
 @collaborateur = info_id($parametres{ident_id});
 unless (@collaborateur) {
 	entete_standard(); 
@@ -243,6 +245,7 @@ sub creer_facture {
   rechercheInfosCollaborateur();
   rechercheTauxPrestation();
   recherchePrestationAFacturerV2();
+  rechercheTva();
   $montantFacture = $nbreAFacturer * $tauxPrestation->[0];
   #($toDayJour, $toDayMois, $toDayAnnee) = (localtime)[3..5];
   #recherche_liste_clients();
@@ -456,19 +459,38 @@ sub rechercheTauxPrestation() {
     my $dateTaux = $parametres{annee}.'-'.($parametres{mois_num} < 10 ? '0'.$parametres{mois_num} : $parametres{mois_num}).'-01';
     $sql = 'Select montant, type, id From tauxPrestation where client_id = '.$dbh->quote($parametres{client_id}).' And collaborateur_id = '.$dbh->quote($user->[2]).' and dateDebut <= '.$dbh->quote($dateTaux).' and dateFin > '.$dbh->quote($dateTaux);
   }
-  print $cgi->div("sql = $sql");
+  #print $cgi->div("sql = $sql");
   #print 'sql = '.$sql, $cgi->br();
   $sth = $dbh->prepare($sql);
   $sth->execute;
   while ($tauxPrestation = $sth->fetchrow_arrayref) {
     #print @$tauxPrestation, $cgi->br();
-    $tauxPrestationByType{$tauxPrestation->[1]} = [ ($tauxPrestation->[0], $tauxPrestation->[2]) ];  
+    $tauxPrestationByType{$tauxPrestation->[1]} = [ ($tauxPrestation->[0], $tauxPrestation->[2]) ];
+    $tauxPrestationExiste = 1;
+    #print $cgi->div("key = $tauxPrestation->[1], value = $tauxPrestation->[0], $tauxPrestation->[2]");  
   }
-  foreach(keys %tauxPrestationByType) {
-    print 'Type = '.$_.': montant = '.$tauxPrestationByType{$_}->[0].', id = '.$tauxPrestationByType{$_}->[1], $cgi->br();
-  }
+  #foreach(keys %tauxPrestationByType) {
+  #  print 'Type = '.$_.': montant = '.$tauxPrestationByType{$_}->[0].', id = '.$tauxPrestationByType{$_}->[1], $cgi->br();
+  #}
+  #print $cgi->div("Taille de \%tauxPrestationByType = ".scalar(keys %tauxPrestationByType));
 
 }
+
+sub rechercheTva() {
+  my $tauxTVA;
+  my $debutMois = $parametres{annee}.'-'.($parametres{mois_num} < 10 ? '0'.$parametres{mois_num} : $parametres{mois_num}).'-01';
+  my $finMois = $parametres{annee}.'-'.($parametres{mois_num} < 10 ? '0'.$parametres{mois_num} : $parametres{mois_num}).'-'.Days_in_Month($parametres{annee}, $parametres{mois_num});
+  my $sql = 'Select * From tva Where dateFin >= '.$dbh->quote($debutMois).' And dateDebut <= '.$dbh->quote($finMois).' order By dateDebut';
+  print $cgi->div("sql = $sql");
+  my $sth = $dbh->prepare($sql);
+  $sth->execute;
+  while($tauxTVA = $sth->fetchrow_arrayref) {
+    print $cgi->div("Taux de TVA = @$tauxTVA");
+    push @tauxTva, [ @$tauxTVA ];
+  }
+  #print $cgi->div($tauxTVA);
+}
+
 
 sub rechercheIntituleMission() {
   my $dateMission = $parametres{annee}.'-'.($parametres{mois_num} < 10 ? '0'.$parametres{mois_num} : $parametres{mois_num}).'-01';
@@ -480,6 +502,7 @@ sub rechercheIntituleMission() {
   $mission->[0] =~ s/é/&eacute;/g;
   #print $cgi->span($mission->[0]);
 }
+
 
 sub recherchePrestationAFacturerV2() {
   my ($sql, $sth);
